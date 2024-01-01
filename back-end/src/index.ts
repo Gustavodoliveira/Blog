@@ -1,16 +1,31 @@
-import "dotenv/config"
+import 'dotenv/config';
 import express from 'express';
-import dBConnect from "./db/dbConnect";
+import helmet from 'helmet';
+import cors from 'cors';
+import dBConnect from './db/dbConnect';
 
-const url = 'mongodb://127.0.0.1:27017/blog'
+//routes
+import userRouter from './routes/userRoutes';
 
-const connect = new dBConnect(url)
+const url = 'mongodb://127.0.0.1:27017/blog';
+
+const connect = new dBConnect(url);
 
 
 
 const app = express();
 
+
+app.use(cors());
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+
+app.use(helmet());
+
+app.use('/user', userRouter);
+
 app.listen(process.env.PORT, () => {
-  connect.Connect();
-  console.log('SERVER START')
+	connect.Connect();
+	console.log('SERVER START');
 });
