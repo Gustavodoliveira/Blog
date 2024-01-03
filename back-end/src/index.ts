@@ -7,7 +7,7 @@ import dBConnect from './db/dbConnect';
 //routes
 import userRouter from './routes/userRoutes';
 
-const url = 'mongodb://127.0.0.1:27017/blog';
+const url = process.env.URLCONNECT || '';
 
 const connect = new dBConnect(url);
 

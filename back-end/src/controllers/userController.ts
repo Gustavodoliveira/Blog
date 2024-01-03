@@ -1,9 +1,12 @@
 
-import UserModel from '../models/user';
+import { user }from '../models/user';
 import { Request, Response } from 'express';
 import * as validator from 'email-validator';
 import bcrypt from 'bcrypt';
 import { MongooseError } from 'mongoose';
+import createUserToken from '../middleware/Create-Token';
+
+
 
 class userController {
 	static async postUser(req:Request, res: Response) {
@@ -16,7 +19,8 @@ class userController {
 
 		if(!validator.validate(email)) return res.status(401).json({ message: 'The email is not valid'});
 
-		const userExists = await UserModel.find({email});
+		const userExists = await user.findOne({email});
+    
 
 		if(userExists) return res.status(401).json({ message: 'The email already exists'});
 
@@ -32,17 +36,35 @@ class userController {
 
 
 		try {
-			const user = await UserModel.create({
+			const userCreate = await user.create({
 				name,
 				email,
 				passwordHash
 			});
 
-			return res.status(200).json({ message: user});
+			createUserToken(userCreate.id, req, res, 'Register Successfully');
 		} catch (error) {
-			throw new MongooseError('Error in server' + error);
+			throw new MongooseError('Error in server' + '' + error);
 		}
 
+	}
+
+	static async login(req: Request, res: Response) {
+		const { email, password } = req.body;
+
+		if(!email) return res.status(401).json({ message: 'The email is required'});
+
+		const userExists = await user.findOne({email});
+
+		if(!userExists) return res.status(401).json({ message: 'The user already exist'});
+
+		if(!password) return res.status(401).json({ message: 'The password is required'});
+
+		const Check_Password = await bcrypt.compare(password, userExists.password);
+	
+		if(!Check_Password) return res.status(401).json({message: 'Your password is invalid'});
+    
+    
 	}
   
 }

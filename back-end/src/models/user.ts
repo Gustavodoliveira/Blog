@@ -1,26 +1,32 @@
-import mongoose from 'mongoose';
+import mongoose, { Model, Schema } from 'mongoose';
 
-const {Schema} = mongoose;
+export interface IModelUser {
+  id?: string;
+  name: string;
+  image: string;
+  password: string;
+  email: string;
+}
 
-const UserModel = mongoose.model(
-	'User',
-	new Schema ({
-		image: {
-			type: String,
-		},
-		name: {
-			type: String,
-			required: true,
-		},
-		email: {
-			type: String,
-			require: true,
-		},
-		password: {
-			type: String,
-			require: true,
-		}
 
-	}, { timestamps: true}));
+const schema = new Schema<IModelUser, Model<IModelUser>> ({
+	image: {
+		type: String,
+	},
+	name: {
+		type: String,
+		required: true,
+	},
+	email: {
+		type: String,
+		require: true,
+		unique: true
+	},
+	password: {
+		type: String,
+		require: true,
+	}
 
-export default UserModel;
+}, { timestamps: true});
+
+export const user = mongoose.model('user', schema); 
