@@ -2,14 +2,18 @@ import 'dotenv/config';
 import { NextFunction, Request, Response } from 'express';
 
 import jwt, { JwtPayload} from 'jsonwebtoken';
-import { CookieOptions } from '../helpers/CookieConfig';
+
+// TODO: cookie
+//import { CookieOptions } from '../helpers/CookieConfig';
 
 
 
 
-export interface CustomRequest extends Request {
+interface CustomRequest extends Request {
   user: string | JwtPayload;
  }
+
+
 
 const checkToken = async (
 	req: Request,
@@ -28,7 +32,7 @@ const checkToken = async (
 	try {
 		const verify = jwt.verify(token, `${process.env.SecretJwt}`);
 		(req as CustomRequest).user = verify;
-		res.cookie('user', (verify as CustomRequest).user, CookieOptions);
+		//res.cookie('user', (verify as CustomRequest).user, CookieOptions);
 		next();
 	} catch (error) {
 		return res.status(400).json({ message: 'Token invalid' });

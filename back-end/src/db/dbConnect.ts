@@ -23,7 +23,7 @@ class dBConnect  {
 			await mongoose.connect(url);
 			console.log('Connect in Db');
 		} catch (e) {
-			console.log(e  + 'not possible connect');
+			console.log(e  + '' + 'NOT POSSIBLE CONNECT');
 		}
     
 	}
