@@ -3,14 +3,14 @@ import mongoose, { Model, Schema } from 'mongoose';
 export interface IModelUser {
   id?: string;
   name: string;
-  image: string;
+  Avatar: string;
   password: string;
   email: string;
 }
 
 
 const schema = new Schema<IModelUser, Model<IModelUser>> ({
-	image: {
+	Avatar: {
 		type: String,
 	},
 	name: {

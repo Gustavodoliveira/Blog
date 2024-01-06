@@ -33,7 +33,12 @@ class userController {
 		if(!validator.validate(email)) return res.status(401).json({ message: 'The email is not valid'});
 
 		const userExists = await user.findOne({email});
-    
+
+		let image = '';
+
+		if (req.file) {
+			image = req.file.filename;
+		}
 
 		if(userExists) return res.status(401).json({ message: 'The email already exists'});
 
@@ -50,6 +55,7 @@ class userController {
 
 		try {
 			const userCreate = await user.create({
+				Avatar: image,
 				name,
 				email,
 				password: passwordHash,
