@@ -30,9 +30,9 @@ const checkToken = async (
 	if (!token) return res.status(401).json({ message: 'access denied' });
 
 	try {
+    
 		const verify = jwt.verify(token, `${process.env.SecretJwt}`);
-		(req as CustomRequest).user = verify;
-		//res.cookie('user', (verify as CustomRequest).user, CookieOptions);
+		( req as CustomRequest).user = verify;
 		next();
 	} catch (error) {
 		return res.status(400).json({ message: 'Token invalid' });

@@ -3,7 +3,7 @@ import { user }from '../models/user';
 import { Request, Response } from 'express';
 import * as validator from 'email-validator';
 import bcrypt from 'bcrypt';
-import { MongooseError } from 'mongoose';
+import mongoose, { MongooseError } from 'mongoose';
 import createUserToken from '../middleware/Create-Token';
 
 
@@ -13,9 +13,13 @@ class userController {
 	static async ShowUser (req: Request, res: Response) {
 		const {id } = req.params;
 
+		const validId = mongoose.Types.ObjectId.isValid(id);
+		
+		if(!validId) return res.status(401).json({ message: 'Id invalid'});
+
 		const User = await  user.findById(id);
 
-		res.send(User);
+		return res.status(200).json(({User}));
 	}
 
 	static async postUser(req:Request, res: Response) {
@@ -123,7 +127,24 @@ class userController {
 
 	}
 
+	static async Delete(req: Request, res: Response) {
+		const { id } = req.params;
 
+		const validId = mongoose.Types.ObjectId.isValid(id);
+		
+		if(!validId) return res.status(401).json({ message: 'Id invalid'});
+
+		const userExists = await user.findOne({_id: id});
+
+		if(!userExists) return res.status(401).json({ message: 'You are not user'});
+
+		try {
+			await user.deleteOne({ _id: id});
+			return res.status(200).json({ message: 'Delete Account Success'});
+		} catch (error) {
+			new MongooseError(error + '' + 'Error in delete account');
+		}
+	}
 
 }
   
