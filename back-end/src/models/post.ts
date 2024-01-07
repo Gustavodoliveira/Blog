@@ -2,7 +2,7 @@ import mongoose, { Model, Schema } from 'mongoose';
 
 
 interface IPost {
-  image: Array<string>,
+  image: Array<object>,
   Title: string,
   Content: string,
   Author: string,
@@ -13,7 +13,7 @@ interface IPost {
 
 const schema = new Schema<IPost, Model<IPost>> ({
 	image: {
-		type: [String]
+		type: [Object]
 	},
 	Title: {
 		type: String,

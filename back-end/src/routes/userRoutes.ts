@@ -2,7 +2,7 @@ import { Router } from 'express';
 import userController from '../controllers/userController';
 import checkToken from '../middleware/check-Token';
 import multer from 'multer';
-import ConfigUserUploadImage from '../helpers/Image-up-user';
+import { ConfigUserUploadImage }from '../helpers/Image-update';
 
 
 const imageUpload = multer(ConfigUserUploadImage );
