@@ -8,6 +8,11 @@ const postRouter = Router();
 
 const upload = multer(ConfigPostUploadImage);
 
-postRouter.get('/posted', checkToken,upload.array('image', 3),PostController.postedPost);
+postRouter.get('/allpost', checkToken, PostController.getAllPost);
+postRouter.get('/posts/:categoric', checkToken, PostController.getPostCategoric);
+postRouter.get('/myposts', checkToken, PostController.getMyPost);
+postRouter.post('/posted', checkToken,upload.array('image'),PostController.postedPost);
+postRouter.patch('/edit/:postId', checkToken, upload.array('image'),PostController.PostUpdate);
+postRouter.delete('/delete/:id', checkToken, PostController.DeletePost);
 
 export default postRouter;

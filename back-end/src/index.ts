@@ -18,14 +18,19 @@ const connect = new dBConnect(url);
 
 const app = express();
 
+const CorsOptions = {
+	credentials: true,
+	origin: '*'
+};
 
-app.use(cors());
+
+app.use(cors(CorsOptions));
 
 app.use('/public', express.static(path.resolve(__dirname, './public')));
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser(process.env.CookieSecret));
 
 app.use(helmet());
 
