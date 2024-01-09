@@ -1,0 +1,48 @@
+@import "../variables/_colors"
+@import "../variables/spacing"
+
+.Header_Container
+	display: flex
+	align-items: center
+	justify-content: center
+	gap: 50rem
+	background-color: $color-primary
+
+	h1
+		color: $color-four
+		font-weight: 200
+
+	nav
+		display: flex
+		margin-left: $spacing-large
+		gap: $spacing-mid
+
+		.icon
+			color: $color-five
+			visibility: hidden
+
+		ul
+			display: flex
+			gap: $spacing-mid
+
+			li
+				position: relative
+				font-size: $spacing-mid-min
+				transition: .5s ease
+
+				&::after
+					content: ""
+					width: 0%
+					height: 2px
+					background-color: $color-five
+					position: absolute
+					border-radius: .3rem
+					bottom: 0
+					left: 0
+					transition: .5s ease-in-out
+
+				&:hover::after
+					width: 100%
+
+				a
+					color: $color-four
