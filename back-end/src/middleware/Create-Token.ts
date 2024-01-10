@@ -8,13 +8,13 @@ const createUserToken = async (id: string, req: Request, res: Response, message:
 		user: id
 	}, `${process.env.SecretJwt}`);
 
-	res.cookie('token', token, {
+	
+	res.status(200).cookie('token', token, {
 		signed: true,
 		maxAge: 1000 * 60 * 15, // would expire after 15 minutes
 		httpOnly: true, 
 		sameSite: 'none'
-	});
-	res.status(200).json({
+	}).json({
 		message: message,
 		token,
 		user: id
