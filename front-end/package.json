@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@react-native-async-storage/async-storage": "^1.21.0",
+    "@types/axios": "^0.14.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -32,6 +33,7 @@
     "@types/redux-persist": "^4.3.1",
     "@typescript-eslint/eslint-plugin": "^6.18.0",
     "@typescript-eslint/parser": "^6.18.0",
+    "axios": "^1.6.5",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "eslint-plugin-react": "^7.33.2",
