@@ -53,6 +53,7 @@ class userController {
 		const passwordHash = await bcrypt.hash(password, salt);
 
 
+
 		try {
 			const userCreate = await user.create({
 				Avatar: image,
