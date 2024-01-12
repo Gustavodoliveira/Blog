@@ -1,0 +1,36 @@
+@import "../variables/_colors"
+@import "../variables/spacing"
+
+.form_controller
+	div
+		display: grid
+		grid-template-columns: repeat(2, 1fr)
+		justify-content: center
+		align-items: center
+		margin: 5rem auto
+		max-width: 10rem
+		position: relative
+
+		input
+			margin: $spacing-min-min $spacing-min-min
+
+	button
+		position: absolute
+		padding: $spacing-min-min
+		font-size: $spacing-mid-min
+		border-radius: $spacing-mid
+		border: none
+		cursor: pointer
+		transition: .5s ease-in-out
+		width: 7rem
+		top: 12rem
+		left: 1rem
+
+		&:hover
+			color: $color-five
+			background-color: $color-tertiary
+			top: 11.5rem
+			box-shadow: 2px 2px 2px 6px $color-tertiary
+
+		&:hover:active
+			top: 12.2rem

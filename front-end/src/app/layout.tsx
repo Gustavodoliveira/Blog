@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
 import styles from './page.module.sass';
+import Header from '@/components/Header';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const inter = Raleway({
 	subsets: ['latin'],
@@ -20,6 +23,8 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${styles.style_body} ${inter.className}`}>
+				<Header />
+				<ToastContainer autoClose={1500} />
 				{children}
 			</body>
 		</html>

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import styled from '../../styles/components/header.module.sass';
+import sty from '../styles/components/header.module.sass';
 import Link from 'next/link';
 import { AiOutlineMenu } from 'react-icons/ai';
 
@@ -19,10 +19,10 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 
 	public render() {
 		return (
-			<header className={styled.Header_Container}>
-				<h1 className={styled.text}>Blog</h1>
+			<header className={sty.Header_Container}>
+				<h1 className={sty.text}>Blog</h1>
 				<nav>
-					<AiOutlineMenu className={styled.icon} />
+					<AiOutlineMenu className={sty.icon} />
 					<ul>
 						<li>
 							<Link href="/">Login</Link>
