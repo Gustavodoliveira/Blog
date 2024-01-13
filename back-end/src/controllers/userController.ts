@@ -40,6 +40,8 @@ class userController {
 			image = req.file.filename;
 		}
 
+    
+
 		if(userExists) return res.status(401).json({ message: 'The email already exists'});
 
 		if(!password) return res.status(401).json({ message: 'The password is required'});
