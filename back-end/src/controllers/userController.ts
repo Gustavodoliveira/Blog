@@ -62,8 +62,6 @@ class userController {
 				password: passwordHash,
 			});
 
-            
-
 			createUserToken(userCreate.id, req, res, 'Register Successfully');
 		} catch (error) {
 			throw new MongooseError('Error in server' + '' + error);
