@@ -1,5 +1,5 @@
 'use client';
-import Sign from '@/hook/Sign';
+import Register from '@/hook/Register';
 
 import * as React from 'react';
 
@@ -17,7 +17,7 @@ export default class Home extends React.Component<IAppProps, IAppState> {
 	public render() {
 		return (
 			<main>
-				<Sign />
+				<Register />
 			</main>
 		);
 	}

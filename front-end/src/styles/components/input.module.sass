@@ -1,0 +1,15 @@
+@import "../variables/_colors"
+@import "../variables/spacing"
+
+.inputs
+	padding: $spacing-min-min
+	border-radius: $spacing-min
+	border: none
+
+	&:focus
+		outline: none
+		box-shadow: 1px 1px 1px .5px $color-five
+
+	&::placeholder
+		font-size: $spacing-min
+		padding-left: $spacing-min-min
