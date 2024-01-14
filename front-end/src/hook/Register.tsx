@@ -5,6 +5,9 @@ import axios from '../api';
 import Input from '@/components/Input';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
+import { setCookie } from 'nookies';
+import { login } from '@/store/AuthUser/Auth';
+import store from '../store/store';
 
 interface errs {
 	message: string;
@@ -35,8 +38,13 @@ const Sign = () => {
 				},
 			})
 			.then((res) => {
-				toast.success(res.data.message);
+				const { message, token } = res.data;
+				setCookie(undefined, 'token', token, {
+					maxAge: 1000 * 60 * 15,
+				});
+				store.dispatch(login(true));
 				navigate.push('/home');
+				toast.success(message);
 			})
 			.catch((e: AxiosError<errs>) => toast.error(e.response?.data.message));
 	};

@@ -2,7 +2,6 @@ import * as React from 'react';
 import style from '@/styles/components/modal.module.sass';
 
 export interface IModalProps {
-	click: React.MouseEventHandler<HTMLDivElement> | undefined;
 	children: React.ReactNode;
 }
 
@@ -17,7 +16,7 @@ export default class Modal extends React.Component<IModalProps, IModalState> {
 
 	public render() {
 		return (
-			<div className={style.modal_container} onClick={this.props.click}>
+			<div className={style.modal_container}>
 				<div className={style.modal_container_wrapper}>
 					<div className={style.modal_container_wrapper_background}>
 						{this.props.children}

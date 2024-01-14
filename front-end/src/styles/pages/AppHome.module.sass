@@ -9,7 +9,36 @@
 	position: relative
 	height: 85vh
 
-.btn_newPost
-	padding: $spacing-min
-	border: none
-	border-radius: $spacing-min-min
+	.btn_newPost
+		padding: $spacing-min
+		border: none
+		border-radius: $spacing-min-min
+
+	.modal_header
+		display: flex
+		align-items: center
+		justify-content: flex-start
+		gap: $spacing-min
+
+	.form_container
+		display: flex
+		flex-direction: column
+		align-items: center
+		justify-content: center
+		gap: $spacing-min
+
+		button
+			padding: $spacing-min-min
+			border-radius: $spacing-min-min
+			text-transform: uppercase
+			color: $color-primary
+			background-color: $color-four
+			border: none
+			max-width: 100px
+			cursor: pointer
+			transition: .5s ease
+
+			&:hover
+				background-color: $color-primary
+				color: $color-five
+				box-shadow: 1px 1px 1px 1px $color-tertiary

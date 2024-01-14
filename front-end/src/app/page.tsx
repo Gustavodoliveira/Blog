@@ -1,5 +1,6 @@
 'use client';
 import Register from '@/hook/Register';
+import ReduxProvider from '@/store/Provider';
 
 import * as React from 'react';
 
@@ -17,7 +18,9 @@ export default class Home extends React.Component<IAppProps, IAppState> {
 	public render() {
 		return (
 			<main>
-				<Register />
+				<ReduxProvider>
+					<Register />
+				</ReduxProvider>
 			</main>
 		);
 	}
