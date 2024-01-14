@@ -6,6 +6,8 @@ export interface IInputProps {
 	Change: React.ChangeEventHandler<HTMLInputElement> | undefined;
 	placeHolder?: string;
 	name: string;
+	id?: string;
+	multiple?: boolean;
 }
 
 export interface IInputState {}
@@ -25,6 +27,8 @@ export default class Input extends React.Component<IInputProps, IInputState> {
 				placeholder={this.props.placeHolder}
 				onChange={this.props.Change}
 				className={style.inputs}
+				id={this.props.id}
+				multiple={this.props.multiple}
 			/>
 		);
 	}

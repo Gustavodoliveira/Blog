@@ -1,4 +1,4 @@
-import {  configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './AuthUser/Auth';
 import { persistReducer } from 'redux-persist';
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
@@ -15,7 +15,9 @@ const persistedReducer = persistReducer(persistConfig, userReducer);
 
 const store = configureStore({
 	reducer: persistedReducer,
-	middleware:  (getDefaultMiddleware) => getDefaultMiddleware()
+	middleware:  (getDefaultMiddleware) => getDefaultMiddleware({
+		serializableCheck: false
+	})
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
