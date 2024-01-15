@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import * as React from 'react';
 import style from '@/styles/pages/AppHome.module.sass';
@@ -9,15 +10,17 @@ import axios from '../../api';
 import { parseCookies } from 'nookies';
 import { AiFillFileImage } from 'react-icons/ai';
 import { AxiosError, AxiosResponse } from 'axios';
+import { Id, toast } from 'react-toastify';
 
 export interface IAppProps {}
 
 export interface IAppState {
 	newPost?: boolean;
-	Image?: unknown;
+	image?: unknown;
 	Title: string;
 	Content: string;
 	categoric: string;
+	Posts: Array<any>;
 }
 
 export default class App extends React.Component<IAppProps, IAppState> {
@@ -25,37 +28,57 @@ export default class App extends React.Component<IAppProps, IAppState> {
 		super(props);
 
 		this.state = {
-			Image: '',
+			image: '',
 			Title: '',
 			Content: '',
 			categoric: '',
+			Posts: [],
 		};
+	}
+
+	async getAllPost() {
+		const { token } = parseCookies();
+		await axios
+			.get('post/allpost', {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			})
+			.then((res: AxiosResponse) => {
+				this.setState({ ...this.state, Posts: res.data.Posts });
+			})
+			.catch((err: AxiosError) => console.log(err));
+	}
+
+	componentDidMount(): Promise<void> {
+		return this.getAllPost();
 	}
 
 	get post() {
 		return {
-			image: this.state.Image,
+			image: this.state.image,
 			Title: this.state.Title,
 			Content: this.state.Content,
 			categoric: this.state.categoric,
 		};
 	}
 
-	async ApiPosted() {
+	async ApiPosted(): Promise<void | string | Id> {
 		const post = this.post;
 		const { token } = parseCookies();
-		console.log(token);
-		console.log(post);
 
-		//await axios
-		//	.post('post/posted', post, {
-		//		headers: {
-		//			Authorization: `Bearer ${token}`,
-		//			'Content-Type': 'multipart/form-data',
-		//		},
-		//	})
-		//	.then((res: AxiosResponse) => console.log(res))
-		//	.catch((e: AxiosError) => console.log(e));
+		await axios
+			.post('post/posted', post, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+					'Content-Type': 'multipart/form-data',
+				},
+			})
+			.then((res: AxiosResponse) => {
+				toast.success(res.data.message);
+				Promise.resolve();
+			})
+			.catch((e: AxiosError) => console.log(e));
 	}
 
 	public render() {
@@ -65,8 +88,6 @@ export default class App extends React.Component<IAppProps, IAppState> {
 		};
 		return (
 			<main className={style.Container}>
-				<h1>Home app</h1>
-
 				<button
 					className={style.btn_newPost}
 					onClick={() => this.setState({ newPost: true })}
@@ -95,7 +116,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 									multiple={true}
 									Change={(e) => {
 										if (!e.target.files) return;
-										this.setState({ ...this.state, Image: e.target.files });
+										this.setState({ ...this.state, image: e.target.files });
 									}}
 								/>
 							</label>
@@ -138,6 +159,9 @@ export default class App extends React.Component<IAppProps, IAppState> {
 						</form>
 					</Modal>
 				)}
+				{this.state.Posts.map((item): React.ReactNode => {
+					return <h1 key={'one'}>{item?.Title}</h1>;
+				})}
 			</main>
 		);
 	}
