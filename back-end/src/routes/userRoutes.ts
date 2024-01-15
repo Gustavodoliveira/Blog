@@ -2,10 +2,10 @@ import { Router } from 'express';
 import userController from '../controllers/userController';
 import checkToken from '../middleware/check-Token';
 import multer from 'multer';
-import { ConfigUserUploadImage }from '../helpers/Image-update';
+import { ConfigUploadImage }from '../helpers/Image-update';
 
 
-const imageUpload = multer(ConfigUserUploadImage );
+const imageUpload = multer(ConfigUploadImage );
 
 const userRouter = Router();
 

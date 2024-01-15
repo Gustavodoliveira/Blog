@@ -26,7 +26,7 @@ const CorsOptions = {
 
 app.use(cors(CorsOptions));
 
-app.use('/public', express.static(path.join(__dirname, './public')));
+app.use('/public', express.static(path.resolve(__dirname, './public')));
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());

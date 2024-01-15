@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { PostController } from '../controllers/postController';
 import checkToken from '../middleware/check-Token';
-import { ConfigPostUploadImage } from '../helpers/Image-update';
+import { ConfigUploadImage } from '../helpers/Image-update';
 import multer from 'multer';
 
 const postRouter = Router();
 
-const upload = multer(ConfigPostUploadImage);
+const upload = multer(ConfigUploadImage);
 
 postRouter.get('/allpost', checkToken, PostController.getAllPost);
 postRouter.get('/posts/:categoric', checkToken, PostController.getPostCategoric);
