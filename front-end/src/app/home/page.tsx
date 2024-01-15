@@ -11,6 +11,7 @@ import { parseCookies } from 'nookies';
 import { AiFillFileImage } from 'react-icons/ai';
 import { AxiosError, AxiosResponse } from 'axios';
 import { Id, toast } from 'react-toastify';
+import Post from '@/components/Post';
 
 export interface IAppProps {}
 
@@ -140,8 +141,8 @@ export default class App extends React.Component<IAppProps, IAppState> {
 										Content: e.target.value,
 									})
 								}
-								cols="30"
-								rows="10"
+								cols={30}
+								rows={10}
 							></textarea>
 
 							<select
@@ -160,7 +161,16 @@ export default class App extends React.Component<IAppProps, IAppState> {
 					</Modal>
 				)}
 				{this.state.Posts.map((item): React.ReactNode => {
-					return <h1 key={'one'}>{item?.Title}</h1>;
+					return (
+						<Post
+							Title={item?.Title}
+							Content={item?.Content}
+							Author={item?.Author}
+							categoric={item?.categoric}
+							key={1}
+							image={item?.image}
+						/>
+					);
 				})}
 			</main>
 		);
