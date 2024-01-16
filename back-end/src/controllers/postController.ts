@@ -133,7 +133,7 @@ export class PostController {
 		if (req.files) {
 			image = req.files;
 			count = image.length;
-			Post.image = image as object[];
+			Post.image = image as unknown as string[];
 		}
 
 		if(count as number > 3) return res.status(401).json({ message: 'You can only send 3 images'});

@@ -2,7 +2,7 @@ import mongoose, { Model, Schema } from 'mongoose';
 
 
 interface IPost {
-  image: Array<object>,
+  image: Array<string>,
   Title: string,
   Content: string,
   Author: string,
