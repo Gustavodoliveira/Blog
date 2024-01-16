@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import * as React from 'react';
 
 export interface IPostProps {
-	image?: any;
+	image?: FileList[];
 	Title: string;
 	Content: string;
 	Author: string;
@@ -19,9 +18,6 @@ export default class Post extends React.Component<IPostProps, IPostState> {
 	}
 
 	public render() {
-		const { path } = this.props.image;
-		console.log(this.props.image);
-
 		return (
 			<div>
 				<h3>{this.props.Title}</h3>
@@ -29,7 +25,7 @@ export default class Post extends React.Component<IPostProps, IPostState> {
 				<i>{this.props.Author}</i>
 				<span>{this.props.categoric}</span>
 				<img
-					src={`${process.env.NEXT_PUBLIC_API}public/6d3fcdab0de8-download.jpeg`}
+					src={`${process.env.NEXT_PUBLIC_API}public/${this.props.image}`}
 					alt="user"
 					width={200}
 					height={200}

@@ -12,6 +12,7 @@ import { AiFillFileImage } from 'react-icons/ai';
 import { AxiosError, AxiosResponse } from 'axios';
 import { Id, toast } from 'react-toastify';
 import Post from '@/components/Post';
+import { log } from 'console';
 
 export interface IAppProps {}
 
@@ -168,7 +169,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 							Author={item?.Author}
 							categoric={item?.categoric}
 							key={1}
-							image={item?.image}
+							image={item.image[0]?.filename}
 						/>
 					);
 				})}
