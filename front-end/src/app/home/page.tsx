@@ -169,7 +169,9 @@ export default class App extends React.Component<IAppProps, IAppState> {
 							Author={item?.Author}
 							categoric={item?.categoric}
 							key={1}
-							image={item.image[0]?.filename}
+							image={item.image.map((item: { filename: any }) => {
+								return item.filename;
+							})}
 						/>
 					);
 				})}
