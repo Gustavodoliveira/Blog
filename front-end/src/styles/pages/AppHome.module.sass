@@ -28,7 +28,7 @@
 	.modal_header
 		display: flex
 		align-items: center
-		justify-content: flex-start
+		justify-content: center
 		gap: $spacing-min
 
 	.form_container
@@ -38,6 +38,14 @@
 		justify-content: center
 		gap: $spacing-min
 		position: relative
+
+		textarea
+			width: 300px
+			border-radius: .5rem
+			resize: none
+
+			&::placeholder
+				padding-left: 2rem
 
 		button
 			padding: $spacing-min-min

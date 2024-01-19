@@ -4,12 +4,16 @@
 .form_controller
 	div
 		display: grid
-		grid-template-columns: repeat(2, 1fr)
+		grid-template-columns: 1fr
 		justify-content: center
 		align-items: center
 		margin: 5rem auto
 		max-width: 10rem
 		position: relative
+
+		label
+			margin: 2rem auto
+			cursor: pointer
 
 		input
 			margin: $spacing-min-min $spacing-min-min
@@ -23,7 +27,7 @@
 		cursor: pointer
 		transition: .5s ease-in-out
 		width: 7rem
-		top: 20rem
+		top: 22rem
 		left: 1rem
 
 		&:hover

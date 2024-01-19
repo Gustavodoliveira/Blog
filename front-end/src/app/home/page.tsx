@@ -12,7 +12,6 @@ import { AiFillFileImage } from 'react-icons/ai';
 import { AxiosError, AxiosResponse } from 'axios';
 import { Id, toast } from 'react-toastify';
 import Post from '@/components/Post';
-import { log } from 'console';
 
 export interface IAppProps {}
 

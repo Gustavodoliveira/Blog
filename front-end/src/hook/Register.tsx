@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { setCookie } from 'nookies';
 import store from '@/store/store';
 import { login } from '@/store/AuthUser/Auth';
+import { AiFillFileImage } from 'react-icons/ai';
 
 interface errs {
 	message: string;
@@ -57,37 +58,37 @@ const Sign = () => {
 			className={style.form_controller}
 		>
 			<div>
-				<label htmlFor="image">Avatar :</label>
-				<Input
-					type="file"
-					name="image"
-					Change={(e) => {
-						if (!e.target.files) return;
-						setUser({ ...user, image: e.target.files[0] });
-					}}
-				/>
-				<label htmlFor="name">Name: </label>
+				<label htmlFor="image">
+					<AiFillFileImage /> <span>Chose a file</span>
+					<Input
+						type="file"
+						name="image"
+						id="image"
+						Change={(e) => {
+							if (!e.target.files) return;
+							setUser({ ...user, image: e.target.files[0] });
+						}}
+					/>
+				</label>
+
 				<Input
 					name="name"
 					type="text"
 					placeHolder="Name"
 					Change={(e) => setUser({ ...user, name: e.target.value })}
 				/>
-				<label htmlFor="email">E-mail: </label>
 				<Input
 					name="email"
 					type="email"
 					placeHolder="E-mail"
 					Change={(e) => setUser({ ...user, email: e.target.value })}
 				/>
-				<label htmlFor="password">Password: </label>
 				<Input
 					name="password"
 					type="password"
 					placeHolder="Password"
 					Change={(e) => setUser({ ...user, password: e.target.value })}
 				/>
-				<label htmlFor="ConfirmPassword">Confirm Password: </label>
 				<Input
 					name="ConfirmPassword"
 					type="password"
