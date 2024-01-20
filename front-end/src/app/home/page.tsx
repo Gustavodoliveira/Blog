@@ -4,7 +4,7 @@ import * as React from 'react';
 import style from '@/styles/pages/AppHome.module.sass';
 import Modal from '@/components/Modal';
 
-import { BsFillPostcardFill } from 'react-icons/bs';
+import { FaWindowClose } from 'react-icons/fa';
 import Input from '@/components/Input';
 import axios from '../../api';
 import { parseCookies } from 'nookies';
@@ -100,7 +100,8 @@ export default class App extends React.Component<IAppProps, IAppState> {
 				{this.state.newPost && (
 					<Modal>
 						<header className={style.modal_header}>
-							<BsFillPostcardFill
+							<FaWindowClose
+								className={style.modal_icon}
 								onClick={() => this.setState({ newPost: false })}
 							/>
 							<h3>Create new post</h3>
@@ -146,10 +147,10 @@ export default class App extends React.Component<IAppProps, IAppState> {
 								cols={30}
 								rows={10}
 							></textarea>
-
+							<label htmlFor="categoric">Categoric: </label>
 							<select
 								name="categoric"
-								id=""
+								id="categoric"
 								onChange={(e) =>
 									this.setState({ ...this.state, categoric: e.target.value })
 								}
@@ -158,7 +159,9 @@ export default class App extends React.Component<IAppProps, IAppState> {
 								<option value="Desert">Desert</option>
 								<option value="Ocean">Ocean</option>
 							</select>
-							<button onClick={Submit}>newPost</button>
+							<button type="submit" onClick={Submit}>
+								newPost
+							</button>
 						</form>
 					</Modal>
 				)}

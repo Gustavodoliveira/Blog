@@ -35,6 +35,7 @@ export default class Post extends React.Component<IPostProps, IPostState> {
 
 		return (
 			<div>
+				<h3>{this.props.Title}</h3>
 				{b && (
 					<img
 						src={`${process.env.NEXT_PUBLIC_API}public/${b}`}
@@ -44,7 +45,7 @@ export default class Post extends React.Component<IPostProps, IPostState> {
 						crossOrigin="anonymous"
 					/>
 				)}
-				<h3>{this.props.Title}</h3>
+
 				<p>{this.props.Content}</p>
 				<i>{this.props.Author}</i>
 				<span>{this.props.categoric}</span>

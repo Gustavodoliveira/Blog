@@ -6,22 +6,23 @@
 	flex-direction: column
 	align-items: center
 	justify-content: center
-	position: relative
 
 	label[for='image']
 		background-color: $color-five
 		padding: $spacing-min-min
+		border-radius: .5rem
 		font-size: 1.2rem
 		color: $color-primary
 		cursor: pointer
+		transition: .5s ease-in-out
+
+		&:hover
+			background-color: red
 
 	.btn_newPost
 		padding: $spacing-min
 		border: none
 		border-radius: $spacing-min-min
-		position: absolute
-		top: 4rem
-		left: 10rem
 
 		&:hover
 
@@ -31,21 +32,44 @@
 		justify-content: center
 		gap: $spacing-min
 
+	.modal_icon
+		font-size: $spacing-mid
+		color: red
+
 	.form_container
 		display: flex
 		flex-direction: column
 		align-items: center
 		justify-content: center
 		gap: $spacing-min
-		position: relative
 
 		textarea
 			width: 300px
+			height: 100px
+			padding: .5rem
 			border-radius: .5rem
+			font-size: $spacing-min
 			resize: none
 
 			&::placeholder
 				padding-left: 2rem
+
+			&::focus
+				padd
+
+		select
+			color: $color-primary
+			padding: $spacing-min-min
+			border: none
+
+			&:active
+				outline: none
+
+			&:focus
+				outline: none
+
+			& option
+				padding: 1rem
 
 		button
 			padding: $spacing-min-min
