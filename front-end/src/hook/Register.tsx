@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import style from '@/styles/components/formController.module.sass';
@@ -7,14 +8,13 @@ import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { setCookie } from 'nookies';
 import store from '@/store/store';
-import { login } from '@/store/AuthUser/Auth';
+import { login, setId } from '@/store/AuthUser/Auth';
+import { errs } from '@/interfaces/errs';
 import { AiFillFileImage } from 'react-icons/ai';
+import { Avatar } from '@/components/Avatar';
 
-interface errs {
-	message: string;
-}
 interface Iuser {
-	image: unknown;
+	image: File;
 	name: string;
 	email: string;
 	password: string;
@@ -23,8 +23,9 @@ interface Iuser {
 
 const Sign = () => {
 	const navigate = useRouter();
+	const [preview, setPreview] = useState<boolean>(false);
 	const [user, setUser] = useState<Iuser>({
-		image: '',
+		image: new File([], 'nothing'),
 		name: '',
 		email: '',
 		password: '',
@@ -39,12 +40,13 @@ const Sign = () => {
 				},
 			})
 			.then((res) => {
-				const { message, token } = res.data;
+				const { message, token, user } = res.data;
 				setCookie(undefined, 'token', token, {
 					signed: true,
 					maxAge: 1000 * 60 * 15,
 				});
 				store.dispatch(login(true));
+				store.dispatch(setId(user));
 				toast.success(message);
 				navigate.push('/home');
 			})
@@ -58,15 +60,23 @@ const Sign = () => {
 			className={style.form_controller}
 		>
 			<div>
+				{preview && (
+					<Avatar
+						url={`${URL.createObjectURL(user.image)}`}
+						height={150}
+						width={150}
+					/>
+				)}
 				<label htmlFor="image">
 					<AiFillFileImage /> <span>Chose a file</span>
 					<Input
-						type="file"
 						name="image"
+						type="file"
 						id="image"
 						Change={(e) => {
 							if (!e.target.files) return;
 							setUser({ ...user, image: e.target.files[0] });
+							setPreview(true);
 						}}
 					/>
 				</label>

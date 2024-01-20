@@ -12,6 +12,7 @@ import { AiFillFileImage } from 'react-icons/ai';
 import { AxiosError, AxiosResponse } from 'axios';
 import { Id, toast } from 'react-toastify';
 import Post from '@/components/Post';
+import store from '@/store/store';
 
 export interface IAppProps {}
 
@@ -51,8 +52,9 @@ export default class App extends React.Component<IAppProps, IAppState> {
 			.catch((err: AxiosError) => console.log(err));
 	}
 
-	componentDidMount(): Promise<void> {
-		return this.getAllPost();
+	componentDidMount(): Promise<void> | void {
+		const logg = store.getState().isLogged;
+		return console.log(logg);
 	}
 
 	get post() {
