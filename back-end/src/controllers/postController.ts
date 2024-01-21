@@ -8,6 +8,22 @@ import { MongooseError } from 'mongoose';
 import { ValidId } from '../helpers/Validate-id';
 
 export class PostController {
+
+	static async getPost (req: Request, res:Response) {
+		const { id } = req.params;
+
+		const IdValid = ValidId(id);
+
+		if(IdValid === false) return res.status(401).json({ message: 'Id invalid'});
+
+
+		const Post = await post.findById(IdValid);
+
+		if(!Post) return res.status(401).json({message: 'Post not exist'});
+
+		return res.status(200).json({ Post });
+	}
+
 	static async postedPost (req: Request, res: Response) {
 		const { Title, Content, categoric} = req.body;
 
