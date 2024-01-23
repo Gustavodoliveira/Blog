@@ -1,7 +1,9 @@
 'use client';
 
+import GetPost from '@/hook/GetPost';
 import * as React from 'react';
-import LoginForm from '@/hook/Login';
+
+import style from '@/styles/pages/PostHome.module.sass';
 
 export interface IAppProps {}
 
@@ -16,10 +18,9 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
 	public render() {
 		return (
-			<div>
-				<h1>login</h1>
-				<LoginForm />
-			</div>
+			<main className={style.container}>
+				<GetPost />
+			</main>
 		);
 	}
 }

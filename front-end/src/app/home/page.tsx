@@ -11,8 +11,8 @@ import { parseCookies } from 'nookies';
 import { AiFillFileImage } from 'react-icons/ai';
 import { AxiosError, AxiosResponse } from 'axios';
 import { Id, toast } from 'react-toastify';
-import Post from '@/components/Post';
-import store from '@/store/store';
+import PostCard from '@/components/Post-Card';
+import Link from 'next/link';
 
 export interface IAppProps {}
 
@@ -53,8 +53,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 	}
 
 	componentDidMount(): Promise<void> | void {
-		const logg = store.getState().isLogged;
-		return console.log(logg);
+		return this.getAllPost();
 	}
 
 	get post() {
@@ -165,20 +164,23 @@ export default class App extends React.Component<IAppProps, IAppState> {
 						</form>
 					</Modal>
 				)}
-				{this.state.Posts.map((item): React.ReactNode => {
-					return (
-						<Post
-							Title={item?.Title}
-							Content={item?.Content}
-							Author={item?.Author}
-							categoric={item?.categoric}
-							key={1}
-							image={item.image.map((item: { filename: any }) => {
-								return item.filename;
-							})}
-						/>
-					);
-				})}
+				<section className={style.post_section}>
+					{this.state.Posts.map((item): React.ReactNode => {
+						return (
+							<Link href={`/${item._id}`} key={item._id}>
+								<PostCard
+									Title={item?.Title}
+									Author={item?.Author}
+									Categoric={item?.categoric}
+									key={1}
+									image={item.image.map((item: { filename: any }) => {
+										return item.filename;
+									})}
+								/>
+							</Link>
+						);
+					})}
+				</section>
 			</main>
 		);
 	}

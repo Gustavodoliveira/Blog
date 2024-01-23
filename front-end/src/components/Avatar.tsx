@@ -14,6 +14,7 @@ export const Avatar = (props: IAvatarProps): React.ReactNode => {
 			width={props.width}
 			height={props.height}
 			className={style.img_avatar}
+			crossOrigin="anonymous"
 		/>
 	);
 };

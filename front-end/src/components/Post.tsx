@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import * as React from 'react';
 
+import style from '@/styles/components/post.module.sass';
+
 export interface IPostProps {
 	image?: string[];
 	Title: string;
@@ -34,8 +36,8 @@ export default class Post extends React.Component<IPostProps, IPostState> {
 		}
 
 		return (
-			<div>
-				<h3>{this.props.Title}</h3>
+			<div className={style.container}>
+				<h3 className={style.title}>{this.props.Title}</h3>
 				{b && (
 					<img
 						src={`${process.env.NEXT_PUBLIC_API}public/${b}`}

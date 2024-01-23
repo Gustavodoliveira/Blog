@@ -2,8 +2,9 @@
 @import "../variables/spacing"
 
 .Container
-	display: flex
-	flex-direction: column
+	display: grid
+	grid-template-columns: 1fr 1.5fr
+	gap: $spacing-gap
 	align-items: center
 	justify-content: center
 
@@ -20,7 +21,10 @@
 			background-color: red
 
 	.btn_newPost
+		margin-left: $spacing-large-g
+		margin
 		padding: $spacing-min
+		max-width: 100px
 		border: none
 		border-radius: $spacing-min-min
 
@@ -86,3 +90,7 @@
 				background-color: $color-primary
 				color: $color-five
 				box-shadow: 1px 1px 1px 1px $color-tertiary
+
+	.post_section
+		display: flex
+		gap: $spacing-large-g

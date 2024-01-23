@@ -54,7 +54,9 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 	public render() {
 		return (
 			<header className={sty.Header_Container}>
-				<h1 className={sty.text}>Blog</h1>
+				<Link href="/">
+					<h1 className={sty.text}>Blog</h1>
+				</Link>
 				<nav>
 					{this.state.user && (
 						<Avatar
