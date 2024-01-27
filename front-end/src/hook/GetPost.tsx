@@ -10,7 +10,7 @@ import { IPost } from '@/interfaces/post';
 
 const GetPost = () => {
 	const [post, setPost] = useState<IPost>({
-		Image: [],
+		image: [],
 		Title: '',
 		Author: '',
 		Content: '',
@@ -28,7 +28,9 @@ const GetPost = () => {
 					Authorization: `Bearer ${token}`,
 				},
 			})
-			.then((res: AxiosResponse) => setPost(res.data?.Post))
+			.then((res: AxiosResponse) => {
+				setPost(res.data?.Post);
+			})
 			.catch((err: AxiosError<errs>) =>
 				toast.error(err.response?.data.message),
 			);
@@ -40,6 +42,10 @@ const GetPost = () => {
 			Author={post.Author}
 			Content={post.Content}
 			categoric={post.Categoric}
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			image={post.image.map((image) => {
+				return image?.filename;
+			})}
 		/>
 	);
 };

@@ -13,6 +13,7 @@ export interface IPostProps {
 
 export interface IPostState {
 	thereIsImage: boolean;
+	images?: string;
 }
 
 export default class Post extends React.Component<IPostProps, IPostState> {
@@ -21,55 +22,58 @@ export default class Post extends React.Component<IPostProps, IPostState> {
 
 		this.state = {
 			thereIsImage: false,
+			images: '',
 		};
 	}
 
-	public render() {
-		let i;
-		let b;
-		let c;
-
+	componentDidMount(): void {
 		if (this.props.image) {
-			i = this.props.image[0];
-			b = this.props.image[1];
-			c = this.props.image[2];
+			this.setState({ ...this.state, thereIsImage: true });
+
+			this.setState({ ...this.state, images: this.props.image[0] });
+			this.props.image[1];
+			this.props.image[2];
 		}
+	}
 
+	public render() {
 		return (
-			<div className={style.container}>
-				<h3 className={style.title}>{this.props.Title}</h3>
-				{b && (
-					<img
-						src={`${process.env.NEXT_PUBLIC_API}public/${b}`}
-						alt="user"
-						width={200}
-						height={200}
-						crossOrigin="anonymous"
-					/>
-				)}
+			<article className={style.container}>
+				<div className={style.container_content}>
+					<h3 className={style.title}>{this.props.Title}</h3>
+					{this.state.images && (
+						<img
+							src={`${process.env.NEXT_PUBLIC_API}public/${this.state.images}`}
+							alt="user"
+							width={200}
+							height={200}
+							crossOrigin="anonymous"
+						/>
+					)}
 
-				<p>{this.props.Content}</p>
-				<i>{this.props.Author}</i>
-				<span>{this.props.categoric}</span>
-				{i && (
-					<img
-						src={`${process.env.NEXT_PUBLIC_API}public/${i}`}
-						alt="user"
-						width={200}
-						height={200}
-						crossOrigin="anonymous"
-					/>
-				)}
-				{c && (
-					<img
-						src={`${process.env.NEXT_PUBLIC_API}public/${c}`}
-						alt="user"
-						width={200}
-						height={200}
-						crossOrigin="anonymous"
-					/>
-				)}
-			</div>
+					<p>{this.props.Content}</p>
+					<i>{this.props.Author}</i>
+					<span>{this.props.categoric}</span>
+					{/*{i && (
+						<img
+							src={`${process.env.NEXT_PUBLIC_API}public/${b}`}
+							alt="user"
+							width={200}
+							height={200}
+							crossOrigin="anonymous"
+						/>
+					)}
+					{c && (
+						<img
+							src={`${process.env.NEXT_PUBLIC_API}public/${c}`}
+							alt="user"
+							width={200}
+							height={200}
+							crossOrigin="anonymous"
+						/>
+					)}*/}
+				</div>
+			</article>
 		);
 	}
 }
