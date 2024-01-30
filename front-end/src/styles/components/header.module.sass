@@ -4,8 +4,7 @@
 .Header_Container
 	display: flex
 	align-items: center
-	justify-content: center
-	gap: 50rem
+	justify-content: space-between
 	background-color: $color-primary
 
 	h1
@@ -23,7 +22,9 @@
 
 		ul
 			display: flex
-			gap: $spacing-mid
+			align-items: center
+			gap: $spacing-large
+			margin-right: $spacing-large
 
 			li
 				position: relative
@@ -46,3 +47,7 @@
 
 				a
 					color: $color-four
+	@media(max-width: 700)
+		nav
+			& > ul
+				display: none

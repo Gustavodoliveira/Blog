@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import sty from '../styles/components/header.module.sass';
 import Link from 'next/link';
-import { AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineMenu, AiOutlineLogout } from 'react-icons/ai';
 import axios from '../api';
 import { AxiosError, AxiosResponse } from 'axios';
 import { errs } from '@/interfaces/errs';
@@ -38,7 +38,6 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 			.then((res: AxiosResponse) => {
 				this.setState({ user: res.data.User });
 				this.setState({ avatar: res.data.User.Avatar });
-				console.log(res);
 			})
 			.catch((err: AxiosError<errs>) => console.log(err));
 	}
@@ -54,25 +53,43 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 	public render() {
 		return (
 			<header className={sty.Header_Container}>
-				<Link href="/">
-					<h1 className={sty.text}>Blog</h1>
-				</Link>
+				<h1 className={sty.text}>
+					<Link href="/">Blog</Link>
+				</h1>
+
 				<nav>
-					{this.state.user && (
-						<Avatar
-							url={`${process.env.NEXT_PUBLIC_API}public/${this.state.avatar}`}
-							height={50}
-							width={50}
-						/>
-					)}
 					<AiOutlineMenu className={sty.icon} />
 					<ul>
-						<li>
-							<Link href="/login">Login</Link>
-						</li>
-						<li>
-							<Link href="/">About</Link>
-						</li>
+						{this.state.user ? (
+							<>
+								{this.state.avatar ? (
+									<Avatar
+										url={`${process.env.NEXT_PUBLIC_API}public/${this.state.avatar}`}
+										height={50}
+										width={50}
+									/>
+								) : (
+									''
+								)}
+								<li>
+									<Link href={'/'}>Profile</Link>
+								</li>
+								<li>
+									<Link href={'/'}>
+										<AiOutlineLogout />
+									</Link>
+								</li>
+							</>
+						) : (
+							<>
+								<li>
+									<Link href="/login">Login</Link>
+								</li>
+								<li>
+									<Link href="/">About</Link>
+								</li>
+							</>
+						)}
 					</ul>
 				</nav>
 			</header>

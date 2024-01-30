@@ -42,7 +42,6 @@ const GetPost = () => {
 			Author={post.Author}
 			Content={post.Content}
 			categoric={post.Categoric}
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			image={post.image.map((image) => {
 				return image?.filename;
 			})}
