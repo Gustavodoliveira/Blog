@@ -4,7 +4,11 @@ import * as React from 'react';
 
 import sty from '../styles/components/header.module.sass';
 import Link from 'next/link';
-import { AiOutlineMenu, AiOutlineLogout } from 'react-icons/ai';
+import {
+	AiOutlineMenu,
+	AiOutlineLogout,
+	AiFillCloseCircle,
+} from 'react-icons/ai';
 import axios from '../api';
 import { AxiosError, AxiosResponse } from 'axios';
 import { errs } from '@/interfaces/errs';
@@ -17,6 +21,7 @@ export interface IAppProps {}
 export interface IAppState {
 	user: object | boolean;
 	avatar: string;
+	active: boolean;
 }
 
 export default class Header extends React.Component<IAppProps, IAppState> {
@@ -26,6 +31,7 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 		this.state = {
 			user: false,
 			avatar: '',
+			active: false,
 		};
 	}
 	async getUser(id: string, token: string) {
@@ -56,10 +62,25 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 				<h1 className={sty.text}>
 					<Link href="/">Blog</Link>
 				</h1>
-
-				<nav>
+				<span
+					onClick={() =>
+						this.state.active
+							? this.setState({ ...this.state, active: false })
+							: this.setState({ ...this.state, active: true })
+					}
+				>
 					<AiOutlineMenu className={sty.icon} />
-					<ul>
+				</span>
+				<nav>
+					<ul className={this.state.active ? sty.active : ''}>
+						{this.state.active ? (
+							<AiFillCloseCircle
+								className={sty.icon_close}
+								onClick={() => this.setState({ ...this.state, active: false })}
+							/>
+						) : (
+							''
+						)}
 						{this.state.user ? (
 							<>
 								{this.state.avatar ? (
@@ -71,10 +92,19 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 								) : (
 									''
 								)}
-								<li>
+
+								<li
+									onClick={() =>
+										this.setState({ ...this.state, active: false })
+									}
+								>
 									<Link href={'/'}>Profile</Link>
 								</li>
-								<li>
+								<li
+									onClick={() =>
+										this.setState({ ...this.state, active: false })
+									}
+								>
 									<Link href={'/'}>
 										<AiOutlineLogout />
 									</Link>
@@ -82,10 +112,18 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 							</>
 						) : (
 							<>
-								<li>
+								<li
+									onClick={() =>
+										this.setState({ ...this.state, active: false })
+									}
+								>
 									<Link href="/login">Login</Link>
 								</li>
-								<li>
+								<li
+									onClick={() =>
+										this.setState({ ...this.state, active: false })
+									}
+								>
 									<Link href="/">About</Link>
 								</li>
 							</>
