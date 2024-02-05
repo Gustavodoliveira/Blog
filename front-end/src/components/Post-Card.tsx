@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import style from '@/styles/components/post-card.module.sass';
 export interface IAppProps {
 	image: string[];
 	Title: string;
@@ -18,7 +18,7 @@ export default class PostCard extends React.Component<IAppProps, IAppState> {
 
 	public render() {
 		return (
-			<div>
+			<div className={style.Container}>
 				<h2>{this.props.Title}</h2>
 				<img
 					src={`${process.env.NEXT_PUBLIC_API}public/${this.props.image[0]}`}

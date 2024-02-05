@@ -19,6 +19,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 	public render() {
 		return (
 			<main className={style.container}>
+				{/* TODO: image carousel  */}
 				<GetPost />
 			</main>
 		);

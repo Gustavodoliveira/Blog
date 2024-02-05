@@ -84,11 +84,13 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 						{this.state.user ? (
 							<>
 								{this.state.avatar ? (
-									<Avatar
-										url={`${process.env.NEXT_PUBLIC_API}public/${this.state.avatar}`}
-										height={50}
-										width={50}
-									/>
+									<li>
+										<Avatar
+											url={`${process.env.NEXT_PUBLIC_API}public/${this.state.avatar}`}
+											height={50}
+											width={50}
+										/>
+									</li>
 								) : (
 									''
 								)}

@@ -8,9 +8,13 @@
 	align-items: center
 	justify-content: center
 
+	@media (max-width: 700px)
+		display: grid
+		grid-template-columns: 1fr
+
 	label[for='image']
-		background-color: $color-five
 		padding: $spacing-min-min
+		margin: .5rem 0
 		border-radius: .5rem
 		font-size: 1.2rem
 		color: $color-primary
@@ -18,15 +22,15 @@
 		transition: .5s ease-in-out
 
 		&:hover
-			background-color: red
+			background-color: $color-five
 
 	.btn_newPost
 		margin-left: $spacing-large-g
-		margin
 		padding: $spacing-min
 		max-width: 100px
 		border: none
 		border-radius: $spacing-min-min
+		cursor: pointer
 
 		&:hover
 
@@ -35,10 +39,18 @@
 		align-items: center
 		justify-content: center
 		gap: $spacing-min
+		border-bottom: 2px solid $color-tertiary
+
+		& > h3
+			margin-left: -4rem
 
 	.modal_icon
+		position: absolute
+		left: 3rem
+		top: 4rem
 		font-size: $spacing-mid
-		color: red
+		color: $color-primary
+		cursor: pointer
 
 	.form_container
 		display: flex
@@ -49,19 +61,17 @@
 
 		textarea
 			width: 300px
-			height: 100px
+			height: 120px
 			padding: .5rem
 			border-radius: .5rem
 			font-size: $spacing-min
 			resize: none
 
 			&::placeholder
-				padding-left: 2rem
-
-			&::focus
-				padd
+				padding-left: .5rem
 
 		select
+			background-color: $color-five
 			color: $color-primary
 			padding: $spacing-min-min
 			border: none
@@ -73,7 +83,7 @@
 				outline: none
 
 			& option
-				padding: 1rem
+				padding: .5rem
 
 		button
 			padding: $spacing-min-min
@@ -94,3 +104,9 @@
 	.post_section
 		display: flex
 		gap: $spacing-large-g
+
+		@media (max-width: 700px)
+			display: grid
+			justify-content: center
+			align-items: center
+			margin: -10rem 0
