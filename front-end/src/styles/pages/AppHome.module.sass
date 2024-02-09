@@ -103,10 +103,26 @@
 
 	.post_section
 		display: flex
-		gap: $spacing-large-g
+		flex-direction: column
+
+		& > h2
+			padding-left: $spacing-min-min
+			margin-bottom: $spacing-min-min
+			border-bottom: 1px solid $color-secondary
+
+		& > div
+			display: grid
+			grid-template-columns: 1fr 1fr
+			margin: $spacing-mid 0
+			gap: $spacing-mid
 
 		@media (max-width: 700px)
 			display: grid
+			grid-template-columns: 1fr
 			justify-content: center
 			align-items: center
 			margin: -10rem 0
+
+			& > div
+				grid-template-columns: 1fr
+				margin: auto

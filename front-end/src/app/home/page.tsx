@@ -165,9 +165,10 @@ export default class App extends React.Component<IAppProps, IAppState> {
 					</Modal>
 				)}
 				<section className={style.post_section}>
-					{this.state.Posts.map((item): React.ReactNode => {
-						return (
-							<Link href={`/${item._id}`} key={item._id}>
+					<h2>Posts</h2>
+					<div>
+						{this.state.Posts.map((item): React.ReactNode => {
+							return (
 								<PostCard
 									Title={item?.Title}
 									Author={item?.Author}
@@ -177,9 +178,9 @@ export default class App extends React.Component<IAppProps, IAppState> {
 										return item.filename;
 									})}
 								/>
-							</Link>
-						);
-					})}
+							);
+						})}
+					</div>
 				</section>
 			</main>
 		);

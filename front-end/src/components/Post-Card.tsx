@@ -23,14 +23,16 @@ export default class PostCard extends React.Component<IAppProps, IAppState> {
 				<img
 					src={`${process.env.NEXT_PUBLIC_API}public/${this.props.image[0]}`}
 					alt="Image post"
-					width={150}
-					height={150}
+					width={200}
+					height={200}
 					crossOrigin="anonymous"
 				/>
 				<div>
 					<span>
-						<strong>{this.props.Author}</strong>
-						{''} <i>{this.props.Categoric}</i>
+						<i>
+							<strong>{this.props.Author}</strong>
+							{''} {this.props.Categoric}
+						</i>
 					</span>
 				</div>
 			</div>

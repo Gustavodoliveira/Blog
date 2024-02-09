@@ -3,3 +3,15 @@
 
 .Container
 	max-width: 200px
+
+	& > div > span
+		font-size: $spacing-min-min
+		visibility: hidden
+
+	&:hover
+		background-color: rgba(0,0,0,0.5)
+		z-index: 1
+		& > h2
+			visibility: hidden
+		& > div > span
+			visibility: visible
