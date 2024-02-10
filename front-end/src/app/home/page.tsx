@@ -90,12 +90,15 @@ export default class App extends React.Component<IAppProps, IAppState> {
 		};
 		return (
 			<main className={style.Container}>
-				<button
-					className={style.btn_newPost}
-					onClick={() => this.setState({ newPost: true })}
-				>
-					New Post
-				</button>
+				<div className={style.Container_header}>
+					<h1>Posts</h1>
+					<button
+						className={style.btn_newPost}
+						onClick={() => this.setState({ newPost: true })}
+					>
+						New Post
+					</button>
+				</div>
 				{this.state.newPost && (
 					<Modal>
 						<header className={style.modal_header}>
@@ -146,18 +149,21 @@ export default class App extends React.Component<IAppProps, IAppState> {
 								cols={30}
 								rows={10}
 							></textarea>
-							<label htmlFor="categoric">Categoric: </label>
-							<select
-								name="categoric"
-								id="categoric"
-								onChange={(e) =>
-									this.setState({ ...this.state, categoric: e.target.value })
-								}
-							>
-								<option value="Forrest">Forrest</option>
-								<option value="Desert">Desert</option>
-								<option value="Ocean">Ocean</option>
-							</select>
+							<label htmlFor="categoric">
+								Categoric:
+								<select
+									name="categoric"
+									id="categoric"
+									onChange={(e) =>
+										this.setState({ ...this.state, categoric: e.target.value })
+									}
+								>
+									<option value="Forrest">Forrest</option>
+									<option value="Desert">Desert</option>
+									<option value="Ocean">Ocean</option>
+								</select>{' '}
+							</label>
+
 							<button type="submit" onClick={Submit}>
 								newPost
 							</button>
@@ -165,19 +171,26 @@ export default class App extends React.Component<IAppProps, IAppState> {
 					</Modal>
 				)}
 				<section className={style.post_section}>
-					<h2>Posts</h2>
 					<div>
 						{this.state.Posts.map((item): React.ReactNode => {
 							return (
-								<PostCard
-									Title={item?.Title}
-									Author={item?.Author}
-									Categoric={item?.categoric}
+								<Link
+									href={`
+								/${item._id}	
+								`}
 									key={1}
-									image={item.image.map((item: { filename: any }) => {
-										return item.filename;
-									})}
-								/>
+								>
+									<PostCard
+										Title={item?.Title}
+										Author={item?.Author}
+										Categoric={item?.categoric}
+										Content={item?.Content}
+										key={1}
+										image={item.image.map((item: { filename: any }) => {
+											return item.filename;
+										})}
+									/>
+								</Link>
 							);
 						})}
 					</div>

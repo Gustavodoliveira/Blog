@@ -1,12 +1,13 @@
+'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import style from '@/styles/components/formController.module.sass';
 import axios from '../api';
 import Input from '@/components/Input';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
-import { setCookie } from 'nookies';
+import { parseCookies, setCookie } from 'nookies';
 import store from '@/store/store';
 import { login, setId } from '@/store/AuthUser/Auth';
 import { errs } from '@/interfaces/errs';
@@ -32,6 +33,12 @@ const Sign = () => {
 		ConfirmPassword: '',
 	});
 
+	useEffect(() => {
+		const { token } = parseCookies();
+		if (token) {
+			navigate.push('/home');
+		}
+	}, []);
 	const onSubmit = async () => {
 		await axios
 			.post('user/create', user, {

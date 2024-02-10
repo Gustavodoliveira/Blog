@@ -60,7 +60,7 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 		return (
 			<header className={sty.Header_Container}>
 				<h1 className={sty.text}>
-					<Link href="/">Blog</Link>
+					<Link href={store.getState().isLogged ? '/home' : '/'}>Blog</Link>
 				</h1>
 				<span
 					onClick={() =>
@@ -100,7 +100,7 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 										this.setState({ ...this.state, active: false })
 									}
 								>
-									<Link href={'/'}>Profile</Link>
+									<Link href={'/profile'}>Profile</Link>
 								</li>
 								<li
 									onClick={() =>

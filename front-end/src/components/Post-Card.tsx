@@ -5,6 +5,7 @@ export interface IAppProps {
 	Title: string;
 	Author: string;
 	Categoric: string;
+	Content: string;
 }
 
 export interface IAppState {}
@@ -20,20 +21,26 @@ export default class PostCard extends React.Component<IAppProps, IAppState> {
 		return (
 			<div className={style.Container}>
 				<h2>{this.props.Title}</h2>
-				<img
-					src={`${process.env.NEXT_PUBLIC_API}public/${this.props.image[0]}`}
-					alt="Image post"
-					width={200}
-					height={200}
-					crossOrigin="anonymous"
-				/>
-				<div>
+				<div className={style.Container_image}>
+					<img
+						src={`${process.env.NEXT_PUBLIC_API}public/${this.props.image[0]}`}
+						alt="Image post"
+						width={200}
+						height={200}
+						crossOrigin="anonymous"
+					/>
+				</div>
+
+				<div className={style.Container_content}>
+					<div>
+						<p>{this.props.Content.slice(0, 30)}...</p>
+					</div>
 					<span>
-						<i>
-							<strong>{this.props.Author}</strong>
-							{''} {this.props.Categoric}
-						</i>
+						<strong>{this.props.Author}</strong>
 					</span>
+					<i>
+						{''} {this.props.Categoric}
+					</i>
 				</div>
 			</div>
 		);

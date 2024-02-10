@@ -2,11 +2,29 @@
 @import "../variables/spacing"
 
 .Container
-	display: grid
-	grid-template-columns: 1fr 1.5fr
-	gap: $spacing-gap
-	align-items: center
-	justify-content: center
+	display: flex
+	flex-direction: column
+
+	.Container_header
+		display: flex
+		align-items: center
+		justify-content: space-between
+
+		h1
+			margin-left: $spacing-mid
+
+		.btn_newPost
+			margin-right: $spacing-large
+			padding: $spacing-min
+			max-width: 100px
+			border: none
+			border-radius: $spacing-min-min
+			cursor: pointer
+			transition: .5s ease
+
+			&:hover
+				background-color: $color-primary
+				color: $color-four
 
 	@media (max-width: 700px)
 		display: grid
@@ -24,14 +42,6 @@
 		&:hover
 			background-color: $color-five
 
-	.btn_newPost
-		margin-left: $spacing-large-g
-		padding: $spacing-min
-		max-width: 100px
-		border: none
-		border-radius: $spacing-min-min
-		cursor: pointer
-
 		&:hover
 
 	.modal_header
@@ -46,11 +56,14 @@
 
 	.modal_icon
 		position: absolute
-		left: 3rem
+		left: 32rem
 		top: 4rem
 		font-size: $spacing-mid
-		color: $color-primary
+		color: $color-five
 		cursor: pointer
+
+		@media (max-width: 700px)
+			left: 2rem
 
 	.form_container
 		display: flex
@@ -62,7 +75,7 @@
 		textarea
 			width: 300px
 			height: 120px
-			padding: .5rem
+			padding: .2rem
 			border-radius: .5rem
 			font-size: $spacing-min
 			resize: none
@@ -70,8 +83,12 @@
 			&::placeholder
 				padding-left: .5rem
 
+		label[for='categoric']
+			display: flex
+			align-items: center
+
 		select
-			background-color: $color-five
+			background-color: $color-secondary
 			color: $color-primary
 			padding: $spacing-min-min
 			border: none
@@ -103,26 +120,21 @@
 
 	.post_section
 		display: flex
-		flex-direction: column
-
-		& > h2
-			padding-left: $spacing-min-min
-			margin-bottom: $spacing-min-min
-			border-bottom: 1px solid $color-secondary
+		margin: $spacing-large auto
 
 		& > div
 			display: grid
 			grid-template-columns: 1fr 1fr
-			margin: $spacing-mid 0
 			gap: $spacing-mid
+
+			& > a
+				color: $color-primary
 
 		@media (max-width: 700px)
 			display: grid
 			grid-template-columns: 1fr
 			justify-content: center
 			align-items: center
-			margin: -10rem 0
 
 			& > div
 				grid-template-columns: 1fr
-				margin: auto
