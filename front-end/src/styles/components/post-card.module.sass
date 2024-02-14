@@ -3,12 +3,12 @@
 
 .Container
 	position: relative
-	max-height: 200px
-	max-width: 250px
-	border-radius: .5rem
+	height: 200px
+	width: 250px
 	transition: 1s ease
 
-	& > .Container_image
+	& > .Container_image > img
+		border-radius: .5rem
 
 	& > .Container_content
 		font-size: $spacing-min-min
@@ -16,40 +16,41 @@
 
 	&:hover
 		background-color: rgba(0,0,0,0.3)
+		margin-left: .5rem
 		z-index: 1
 		border-radius: .5rem
+		width: 200px
+		height: 180px
+
 		& > h2
 			display: none
 
 		& > .Container_image
+			margin-left: -.1rem
 			opacity: 0.2
 
 		& > .Container_content
-			max-width: 225px
-			-max-height: 180px
 			visibility: visible
 
 			@media (max-width: 700px)
 				font-size: $spacing-min-min
 
-			& > div
-				margin: .2rem .5rem
-				font-size: $spacing-min
-				position: absolute
-				top: 0
+		& > div
+			margin: .2rem .5rem
+			font-size: $spacing-min-min
+			position: absolute
+			top: 0
 
-				& > p
-					text-align: justify
-					width: 100px
+			& > div > p
+				margin-left: .5rem
 
 			& > span
-				display: block
 				margin-left: .5rem
 				position: absolute
-				top: 10rem
+				top: 8rem
 
 			& > i
 				font-size: $spacing-min-min
 				margin-left: .5rem
 				position: absolute
-				top: 11rem
+				top: 10rem

@@ -13,8 +13,9 @@ import axios from '../api';
 import { AxiosError, AxiosResponse } from 'axios';
 import { errs } from '@/interfaces/errs';
 import store from '@/store/store';
-import { parseCookies } from 'nookies';
+import { destroyCookie, parseCookies } from 'nookies';
 import { Avatar } from './Avatar';
+import { logout } from '@/store/AuthUser/Auth';
 
 export interface IAppProps {}
 
@@ -74,10 +75,15 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 				<nav>
 					<ul className={this.state.active ? sty.active : ''}>
 						{this.state.active ? (
-							<AiFillCloseCircle
-								className={sty.icon_close}
-								onClick={() => this.setState({ ...this.state, active: false })}
-							/>
+							<Link href={'/'}>
+								<AiFillCloseCircle
+									className={sty.icon_close}
+									onClick={() => {
+										store.dispatch(logout(false));
+										this.setState({ ...this.state, active: false });
+									}}
+								/>
+							</Link>
 						) : (
 							''
 						)}

@@ -51,6 +51,7 @@ const Sign = () => {
 				setCookie(undefined, 'token', token, {
 					signed: true,
 					maxAge: 1000 * 60 * 15,
+					path: '/',
 				});
 				store.dispatch(login(true));
 				store.dispatch(setId(user));

@@ -1,6 +1,7 @@
 
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { destroyCookie } from 'nookies';
 
  interface AuthUser{
     isLogged: boolean,
@@ -21,6 +22,9 @@ export const userReducer = createSlice({
 		},
 
 		logout: (state, action: PayloadAction<boolean>) => {
+			destroyCookie({}, 'token', {
+				path: '/'
+			});
 			state.isLogged = action.payload;
 		},
 
