@@ -18,7 +18,7 @@ const getUserByToken = async (token: string ): Promise<mongoose.Types.ObjectId |
 		if(!User) return ;
 		return User._id;
 	} catch (error) {
-		return  error;
+		return  error + 'ola';
 	}
 };
 
