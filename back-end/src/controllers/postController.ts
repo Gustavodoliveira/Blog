@@ -5,19 +5,14 @@ import getUserByToken from '../helpers/Get-user-by-token';
 import { post } from '../models/post';
 import { user } from '../models/user';
 import { MongooseError } from 'mongoose';
-import { ValidId } from '../helpers/Validate-id';
 
 export class PostController {
 
 	static async getPost (req: Request, res:Response) {
 		const { id } = req.params;
 
-		const IdValid = ValidId(id);
 
-		if(IdValid === false) return res.status(401).json({ message: 'Id invalid'});
-
-
-		const Post = await post.findById(IdValid);
+		const Post = await post.findById(id);
 
 		if(!Post) return res.status(401).json({message: 'Post not exist'});
 
@@ -97,7 +92,8 @@ export class PostController {
 
 		const id =  await getUserByToken(token);
 
-		if(!id) return res.status(401).json({ message: 'Id not valid'});
+		
+
 		const User = await user.findById(id);
 
 		if(!User) return res.status(400).json({message :'User not found'});
@@ -122,12 +118,7 @@ export class PostController {
 
 	static async PostUpdate (req: Request, res:Response) {
 		const { postId } = req.params;
-
-		const IdValid = ValidId(postId);
-
-		if(IdValid === false) return res.status(401).json({ message: 'Id invalid'});
-
-		const Post = await post.findById(IdValid);
+		const Post = await post.findById(postId);
 
 		if(!Post) return res.status(204).json({ message: 'Post not found'});
 
@@ -171,12 +162,10 @@ export class PostController {
 	static async DeletePost (req: Request, res: Response) {
 		const { id } = req.params;
 
-		const IdValid = ValidId(id);
-
-		if(IdValid === false) return res.status(401).json({ message: 'Id invalid'});
+	
 
 		try {
-			const Post = await post.findById(IdValid);
+			const Post = await post.findById(id);
 
 			if(!Post) return res.status(204).json({ message: 'Post not found'});
 
