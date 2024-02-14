@@ -11,9 +11,9 @@ const upload = multer(ConfigUploadImage);
 postRouter.get('/allpost', checkToken, PostController.getAllPost);
 postRouter.get('/posts/:categoric', checkToken, PostController.getPostCategoric);
 postRouter.get('/:id', checkToken, PostController.getPost);
-postRouter.get('/myposts', checkToken, PostController.getMyPost);
+postRouter.get('/myposts/:id', checkToken, PostController.getMyPost);
 postRouter.post('/posted', checkToken,upload.array('image[]', 3),PostController.postedPost);
 postRouter.patch('/edit/:postId', checkToken, upload.array('image'),PostController.PostUpdate);
-postRouter.delete('/delete/:id', checkToken, PostController.DeletePost);
+postRouter.delete('/delete/:postid', checkToken, PostController.DeletePost);
 
 export default postRouter;
