@@ -97,11 +97,8 @@ export class PostController {
 
 		const id =  await getUserByToken(token);
 
-		const IdValid = ValidId(id as string);
-
-		if(IdValid === false) return res.status(401).json({ message: 'Id invalid'});
-
-		const User = await user.findById(IdValid);
+		if(!id) return res.status(401).json({ message: 'Id not valid'});
+		const User = await user.findById(id);
 
 		if(!User) return res.status(400).json({message :'User not found'});
 
