@@ -22,7 +22,7 @@ export const userReducer = createSlice({
 		},
 
 		logout: (state, action: PayloadAction<boolean>) => {
-			destroyCookie({}, 'token', {
+			destroyCookie(undefined, 'token',{
 				path: '/'
 			});
 			state.isLogged = action.payload;

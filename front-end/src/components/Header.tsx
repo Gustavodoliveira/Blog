@@ -4,18 +4,14 @@ import * as React from 'react';
 
 import sty from '../styles/components/header.module.sass';
 import Link from 'next/link';
-import {
-	AiOutlineMenu,
-	AiOutlineLogout,
-	AiFillCloseCircle,
-} from 'react-icons/ai';
+import { AiOutlineMenu, AiFillCloseCircle } from 'react-icons/ai';
 import axios from '../api';
 import { AxiosError, AxiosResponse } from 'axios';
 import { errs } from '@/interfaces/errs';
 import store from '@/store/store';
-import { destroyCookie, parseCookies } from 'nookies';
 import { Avatar } from './Avatar';
 import { logout } from '@/store/AuthUser/Auth';
+import { parseCookies } from 'nookies';
 
 export interface IAppProps {}
 
@@ -35,7 +31,7 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 			active: false,
 		};
 	}
-	async getUser(id: string, token: string) {
+	async getUser(id: string, token: string | null) {
 		await axios
 			.get(`user/show/${id}`, {
 				headers: {
@@ -112,11 +108,7 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 									onClick={() =>
 										this.setState({ ...this.state, active: false })
 									}
-								>
-									<Link href={'/'}>
-										<AiOutlineLogout />
-									</Link>
-								</li>
+								></li>
 							</>
 						) : (
 							<>

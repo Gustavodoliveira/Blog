@@ -7,12 +7,12 @@ import Modal from '@/components/Modal';
 import { FaWindowClose } from 'react-icons/fa';
 import Input from '@/components/Input';
 import axios from '../../api';
-import { parseCookies } from 'nookies';
 import { AiFillFileImage } from 'react-icons/ai';
 import { AxiosError, AxiosResponse } from 'axios';
 import { Id, toast } from 'react-toastify';
 import PostCard from '@/components/Post-Card';
 import Link from 'next/link';
+import { parseCookies } from 'nookies';
 
 export interface IAppProps {}
 
@@ -39,7 +39,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 	}
 
 	async getAllPost() {
-		const { token } = parseCookies();
+		const token = parseCookies();
 		await axios
 			.get('post/allpost', {
 				headers: {
@@ -67,7 +67,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
 	async ApiPosted(): Promise<void | string | Id> {
 		const post = this.post;
-		const { token } = parseCookies();
+		const token = localStorage.getItem('token');
 
 		await axios
 			.post('post/posted', post, {

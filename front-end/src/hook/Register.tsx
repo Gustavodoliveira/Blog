@@ -7,12 +7,12 @@ import axios from '../api';
 import Input from '@/components/Input';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
-import { parseCookies, setCookie } from 'nookies';
 import store from '@/store/store';
 import { login, setId } from '@/store/AuthUser/Auth';
 import { errs } from '@/interfaces/errs';
 import { AiFillFileImage } from 'react-icons/ai';
 import { Avatar } from '@/components/Avatar';
+import { parseCookies, setCookie } from 'nookies';
 
 interface Iuser {
 	image: File;
@@ -39,6 +39,7 @@ const Sign = () => {
 			navigate.push('/home');
 		}
 	}, []);
+
 	const onSubmit = async () => {
 		await axios
 			.post('user/create', user, {
@@ -49,8 +50,7 @@ const Sign = () => {
 			.then((res) => {
 				const { message, token, user } = res.data;
 				setCookie(undefined, 'token', token, {
-					signed: true,
-					maxAge: 1000 * 60 * 15,
+					maxAge: 24 * 60 * 15,
 					path: '/',
 				});
 				store.dispatch(login(true));

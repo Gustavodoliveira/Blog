@@ -4,11 +4,11 @@ import style from '@/styles/components/formController.module.sass';
 import { AxiosError, AxiosResponse } from 'axios';
 import store from '@/store/store';
 import { login, setId } from '@/store/AuthUser/Auth';
-import { setCookie } from 'nookies';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import axios from '../api';
 import { errs } from '@/interfaces/errs';
+import { setCookie } from 'nookies';
 
 interface IUserLogin {
 	email: string;
@@ -30,8 +30,8 @@ const LoginForm = () => {
 				store.dispatch(login(true));
 				store.dispatch(setId(user));
 				setCookie(undefined, 'token', token, {
-					signed: true,
-					maxAge: 1000 * 60 * 15,
+					maxAge: 24 * 60 * 15,
+					path: '/',
 				});
 				toast.success(message);
 				navigate.push('/home');
