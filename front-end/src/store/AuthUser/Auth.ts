@@ -1,16 +1,19 @@
 
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { destroyCookie } from 'nookies';
+import { destroyCookie,  } from 'nookies';
 
  interface AuthUser{
     isLogged: boolean,
-		setId: string
+		setId: string,
+		Token: boolean
 }
 
 const initialState: AuthUser = {
 	isLogged: false ,
-	setId: ''
+	Token: false,
+	setId: '',
+
 };
 
 export const userReducer = createSlice({
@@ -30,9 +33,9 @@ export const userReducer = createSlice({
 
 		setId: (state, action: PayloadAction<string>) => {
 			state.setId = action.payload;
-		}
+		},
  	}
 });
 
-export const { login, logout, setId} = userReducer.actions;
+export const { login, logout, setId,} = userReducer.actions;
 export default userReducer.reducer;

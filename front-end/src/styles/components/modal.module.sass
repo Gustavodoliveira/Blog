@@ -24,3 +24,24 @@
 		width: 100%
 		padding: $spacing-large
 		border-radius: $spacing-min
+
+		.modal_header
+			display: flex
+			align-items: center
+			justify-content: center
+			gap: 8rem
+			border-bottom: 2px solid $color-tertiary
+
+			div
+				display: flex
+				gap: 1rem
+				margin-top: -5rem
+
+			.modal_icon
+				text-align: start
+				font-size: $spacing-mid
+				color: $color-five
+				cursor: pointer
+
+			@media (max-width: 700px)
+				left: 2rem

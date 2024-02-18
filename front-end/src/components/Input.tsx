@@ -3,11 +3,12 @@ import style from '@/styles/components/input.module.sass';
 
 export interface IInputProps {
 	type: string;
-	Change: React.ChangeEventHandler<HTMLInputElement> | undefined;
+	Change?: React.ChangeEventHandler<HTMLInputElement> | undefined;
 	placeHolder?: string;
 	name: string;
 	id?: string;
 	multiple?: boolean;
+	value?: string;
 }
 
 export interface IInputState {}
@@ -29,6 +30,7 @@ export default class Input extends React.Component<IInputProps, IInputState> {
 				className={style.inputs}
 				id={this.props.id}
 				multiple={this.props.multiple}
+				value={this.props.value}
 			/>
 		);
 	}

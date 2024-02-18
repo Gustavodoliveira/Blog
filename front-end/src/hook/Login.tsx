@@ -1,6 +1,5 @@
 import Input from '@/components/Input';
 import React, { useState } from 'react';
-import style from '@/styles/components/formController.module.sass';
 import { AxiosError, AxiosResponse } from 'axios';
 import store from '@/store/store';
 import { login, setId } from '@/store/AuthUser/Auth';
@@ -9,6 +8,8 @@ import { toast } from 'react-toastify';
 import axios from '../api';
 import { errs } from '@/interfaces/errs';
 import { setCookie } from 'nookies';
+import Form from '@/components/Form';
+import Button from '@/components/Button';
 
 interface IUserLogin {
 	email: string;
@@ -42,29 +43,21 @@ const LoginForm = () => {
 	};
 
 	return (
-		<form
-			action="post"
-			onSubmit={(e) => e.preventDefault()}
-			className={style.form_controller}
-		>
-			<div>
-				<Input
-					name="email"
-					type="email"
-					placeHolder="E-mail"
-					Change={(e) => setUser({ ...user, email: e.target.value })}
-				/>
-				<Input
-					name="password"
-					type="password"
-					placeHolder="Password"
-					Change={(e) => setUser({ ...user, password: e.target.value })}
-				/>
-				<button type="submit" className={style.login_btn} onClick={loginUser}>
-					Login
-				</button>
-			</div>
-		</form>
+		<Form>
+			<Input
+				name="email"
+				type="email"
+				placeHolder="E-mail"
+				Change={(e) => setUser({ ...user, email: e.target.value })}
+			/>
+			<Input
+				name="password"
+				type="password"
+				placeHolder="Password"
+				Change={(e) => setUser({ ...user, password: e.target.value })}
+			/>
+			<Button Content="Login" Click={loginUser} />
+		</Form>
 	);
 };
 

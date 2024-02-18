@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import sty from '../styles/components/header.module.sass';
 import Link from 'next/link';
-import { AiOutlineMenu, AiFillCloseCircle } from 'react-icons/ai';
+import { AiOutlineMenu, AiOutlineLogout } from 'react-icons/ai';
 import axios from '../api';
 import { AxiosError, AxiosResponse } from 'axios';
 import { errs } from '@/interfaces/errs';
@@ -12,6 +12,7 @@ import store from '@/store/store';
 import { Avatar } from './Avatar';
 import { logout } from '@/store/AuthUser/Auth';
 import { parseCookies } from 'nookies';
+import { toast } from 'react-toastify';
 
 export interface IAppProps {}
 
@@ -31,7 +32,7 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 			active: false,
 		};
 	}
-	async getUser(id: string, token: string | null) {
+	async getUser(id: string, token: string) {
 		await axios
 			.get(`user/show/${id}`, {
 				headers: {
@@ -42,7 +43,9 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 				this.setState({ user: res.data.User });
 				this.setState({ avatar: res.data.User.Avatar });
 			})
-			.catch((err: AxiosError<errs>) => console.log(err));
+			.catch((err: AxiosError<errs>) => {
+				toast.error(err.response?.data.message);
+			});
 	}
 
 	componentDidMount(): Promise<void> | void {
@@ -70,19 +73,6 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 				</span>
 				<nav>
 					<ul className={this.state.active ? sty.active : ''}>
-						{this.state.active ? (
-							<Link href={'/'}>
-								<AiFillCloseCircle
-									className={sty.icon_close}
-									onClick={() => {
-										store.dispatch(logout(false));
-										this.setState({ ...this.state, active: false });
-									}}
-								/>
-							</Link>
-						) : (
-							''
-						)}
 						{this.state.user ? (
 							<>
 								{this.state.avatar ? (
@@ -104,11 +94,16 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 								>
 									<Link href={'/profile'}>Profile</Link>
 								</li>
-								<li
-									onClick={() =>
-										this.setState({ ...this.state, active: false })
-									}
-								></li>
+								<li>
+									<Link href={'/'}>
+										<AiOutlineLogout
+											onClick={() => {
+												store.dispatch(logout(false));
+												this.setState({ ...this.state, active: false });
+											}}
+										/>
+									</Link>
+								</li>
 							</>
 						) : (
 							<>

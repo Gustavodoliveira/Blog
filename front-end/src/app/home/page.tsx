@@ -3,6 +3,8 @@
 import * as React from 'react';
 import style from '@/styles/pages/AppHome.module.sass';
 import Modal from '@/components/Modal';
+import SecondStyle from '@/styles/components/formController.module.sass';
+import TertiaryStyle from '@/styles/components/modal.module.sass';
 
 import { FaWindowClose } from 'react-icons/fa';
 import Input from '@/components/Input';
@@ -13,6 +15,8 @@ import { Id, toast } from 'react-toastify';
 import PostCard from '@/components/Post-Card';
 import Link from 'next/link';
 import { parseCookies } from 'nookies';
+import Form from '@/components/Form';
+import Button from '@/components/Button';
 
 export interface IAppProps {}
 
@@ -39,7 +43,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 	}
 
 	async getAllPost() {
-		const token = parseCookies();
+		const { token } = parseCookies();
 		await axios
 			.get('post/allpost', {
 				headers: {
@@ -88,6 +92,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 			const resp = this.ApiPosted();
 			console.log(resp);
 		};
+
 		return (
 			<main className={style.Container}>
 				<div className={style.Container_header}>
@@ -100,19 +105,18 @@ export default class App extends React.Component<IAppProps, IAppState> {
 					</button>
 				</div>
 				{this.state.newPost && (
-					<Modal>
-						<header className={style.modal_header}>
-							<FaWindowClose
-								className={style.modal_icon}
-								onClick={() => this.setState({ newPost: false })}
-							/>
-							<h3>Create new post</h3>
-						</header>
-						<form
-							method="post"
-							className={style.form_container}
-							onSubmit={(e) => e.preventDefault()}
-						>
+					<Modal
+						headerChildren={
+							<>
+								<FaWindowClose
+									className={TertiaryStyle.modal_icon}
+									onClick={() => this.setState({ newPost: false })}
+								/>
+								<h3>Create new post</h3>
+							</>
+						}
+					>
+						<Form>
 							<label htmlFor="image">
 								<AiFillFileImage /> <span>Chose a files</span>
 								<Input
@@ -164,10 +168,12 @@ export default class App extends React.Component<IAppProps, IAppState> {
 								</select>{' '}
 							</label>
 
-							<button type="submit" onClick={Submit}>
-								newPost
-							</button>
-						</form>
+							<Button
+								Content="New Post"
+								Click={Submit}
+								Class={SecondStyle.btn_form_modal}
+							/>
+						</Form>
 					</Modal>
 				)}
 				<section className={style.post_section}>

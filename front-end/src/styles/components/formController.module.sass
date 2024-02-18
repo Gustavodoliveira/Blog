@@ -2,47 +2,75 @@
 @import "../variables/spacing"
 
 .form_controller
-	div
-		display: grid
-		grid-template-columns: 1fr
-		justify-content: center
+	display: grid
+	grid-template-columns: 1fr
+	justify-content: center
+	align-items: center
+	margin: 2rem auto
+	gap: $spacing-min
+
+	input
+		max-width: 15rem
+		margin: 0 auto
+
+	textarea
+		width: 300px
+		height: 120px
+		padding: .2rem
+		border-radius: .5rem
+		font-size: $spacing-min
+		resize: none
+
+		&::placeholder
+			padding-left: .5rem
+
+	label[for='categoric']
+		display: flex
 		align-items: center
-		margin: 5rem auto
-		max-width: 10rem
 
-		label
-			margin: 2rem auto
-			cursor: pointer
-
-		input
-			margin: $spacing-min-min $spacing-min-min
-
-	.login_btn
-		top: 9rem
-
-		&:hover
-			top: 8rem
-
-			&:active
-				top: 9rem
-
-	button
-		margin: 2rem auto
+	label[for='image']
 		padding: $spacing-min-min
-		font-size: $spacing-mid-min
-		border-radius: $spacing-mid
-		border: none
+		max-width: 20rem
+		margin: .5rem auto
+		border-radius: .5rem
+		font-size: 1.2rem
+		color: $color-primary
 		cursor: pointer
 		transition: .5s ease-in-out
-		width: 7rem
-		top: 22rem
-		left: 1rem
 
 		&:hover
-			color: $color-five
-			background-color: $color-tertiary
-			top: 21.0rem
-			box-shadow: 2px 2px 2px 6px $color-tertiary
+			background-color: $color-five
 
-		&:hover:active
-			top: 22.0rem
+	select
+		background-color: $color-secondary
+		color: $color-primary
+		padding: $spacing-min-min
+		border: none
+
+		&:active
+			outline: none
+
+		&:focus
+			outline: none
+
+		& option
+			padding: .5rem
+
+	label
+		margin: 2rem auto
+		cursor: pointer
+
+	button
+		margin: 0 auto
+		max-width: 10rem
+
+	.btn_form_modal
+		position: absolute
+		top: 23rem
+		left: 6rem
+
+		&:hover
+			top: 22.5rem
+
+			&:active
+				top: 23rem
