@@ -4,6 +4,12 @@ import Input from '@/components/Input';
 import React, { useState } from 'react';
 import { AiFillFileImage } from 'react-icons/ai';
 import { Iuser as User } from './Register';
+import axios from '../api';
+import { AxiosError, AxiosResponse } from 'axios';
+import { errs } from '@/interfaces/errs';
+import { parseCookies } from 'nookies';
+import store from '@/store/store';
+import { toast } from 'react-toastify';
 
 const UpdateUser = (user: User) => {
 	const [iuser, setUser] = useState<User>({
@@ -13,6 +19,24 @@ const UpdateUser = (user: User) => {
 		password: '',
 		ConfirmPassword: '',
 	});
+
+	const edit = () => {
+		const { token } = parseCookies();
+		const id = store.getState().setId;
+
+		axios
+			.patch(`user/update/${id}`, iuser, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			})
+			.then((res: AxiosResponse) => {
+				toast.success(res.data.message);
+			})
+			.catch((err: AxiosError<errs>) => {
+				toast.error(err.response?.data.message);
+			});
+	};
 	return (
 		<>
 			<Form>
@@ -39,7 +63,7 @@ const UpdateUser = (user: User) => {
 					type="password"
 					placeHolder="Confirm password"
 				/>
-				<Button Content="Edit" Click={() => console.log(iuser)} />
+				<Button Content="Edit" Click={() => edit()} />
 			</Form>
 		</>
 	);

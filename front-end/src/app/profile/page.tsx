@@ -96,13 +96,6 @@ export default class App extends React.Component<IAppProps, IAppState> {
 			});
 	}
 
-	async editUser() {
-		const { token } = parseCookies();
-		const id = store.getState().setId;
-
-		axios.patch(`user/update/${id}`, this.state.user);
-	}
-
 	componentDidMount(): void {
 		const id = store.getState().setId;
 		const { token } = parseCookies();
@@ -114,59 +107,62 @@ export default class App extends React.Component<IAppProps, IAppState> {
 	public render() {
 		return (
 			<main>
-				<div>
+				<section className={style.header_page}>
 					<h1>profile</h1>
 					<Button
-						Content="Edit your account"
+						Content="Edit account"
 						Click={() => this.setState({ isVisible: true })}
 					/>
-				</div>
-				{this.state.isVisible && (
-					<Modal
-						headerChildren={
-							<>
-								<div>
-									<FaWindowClose
-										onClick={() => this.setState({ isVisible: false })}
-										className={TertiaryStyle.modal_icon}
-									/>
-									<Link href={'/'}>
-										<AiOutlineUserDelete
-											className={style.delete}
-											onClick={this.deleteUser}
-										/>
-									</Link>
-								</div>
-								<h2>Edit Account</h2>
-							</>
-						}
-					>
-						<UpdateUser
-							email={this.state.user.email}
-							image={this.state.user.image}
-							name={this.state.user.name}
-							password={''}
-							ConfirmPassword={''}
-						/>
-					</Modal>
-				)}
 
-				<section>
-					<h3>My posts</h3>
-					{this.state.myPosts.map((post): React.ReactNode => {
-						return (
-							<PostCard
-								Author={post?.Author}
-								Categoric={post.categoric}
-								Content={post.Content}
-								Title={post.Title}
-								image={post.image.map((item: { filename: unknown }) => {
-									return item.filename;
-								})}
-								key={post._id}
+					{this.state.isVisible && (
+						<Modal
+							headerChildren={
+								<>
+									<div>
+										<FaWindowClose
+											onClick={() => this.setState({ isVisible: false })}
+											className={TertiaryStyle.modal_icon}
+										/>
+										<Link href={'/'}>
+											<AiOutlineUserDelete
+												className={style.delete}
+												onClick={this.deleteUser}
+											/>
+										</Link>
+									</div>
+									<h2>Edit Account</h2>
+								</>
+							}
+						>
+							<UpdateUser
+								email={this.state.user.email}
+								image={this.state.user.image}
+								name={this.state.user.name}
+								password={''}
+								ConfirmPassword={''}
 							/>
-						);
-					})}
+						</Modal>
+					)}
+				</section>
+				<section className={style.myPost_Section}>
+					<h3>My posts</h3>
+					<div>
+						{this.state.myPosts.map((post): React.ReactNode => {
+							return (
+								<Link href={`/${post._id}`} key={post._id}>
+									<PostCard
+										Author={post?.Author}
+										Categoric={post.categoric}
+										Content={post.Content}
+										Title={post.Title}
+										image={post.image.map((item: { filename: unknown }) => {
+											return item.filename;
+										})}
+									/>
+								</Link>
+							);
+						})}
+					</div>
 				</section>
 			</main>
 		);

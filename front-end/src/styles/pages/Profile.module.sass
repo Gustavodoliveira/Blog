@@ -1,10 +1,29 @@
 @import "../variables/_colors"
 @import "../variables/spacing"
 
-.delete
-	border: none
-	padding: 0.4rem
-	background-color: red
-	color: $color-four
-	border-radius: .5rem
-	text-transform: uppercase
+.header_page
+	display: flex
+	align-items: center
+	justify-content: space-between
+	margin: $spacing-mid $spacing-large-g
+
+	h1
+		text-transform: uppercase
+
+.myPost_Section
+	display: flex
+	flex-direction: column
+
+	h3
+		margin: $spacing-large 2rem
+		padding: $spacing-min-min $spacing-large-g
+		text-transform: uppercase
+		border-bottom: 1px solid $color-secondary
+
+	& > div
+		display: grid
+		grid-template-columns: 1fr 1fr 1fr
+		align-items: center
+		justify-content: center
+		gap: $spacing-mid
+		margin: 2rem auto
