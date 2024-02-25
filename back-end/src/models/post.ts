@@ -32,10 +32,6 @@ const schema = new Schema<IPost, Model<IPost>> ({
 		type: String,
 		required: true
 	},
-	categoric: {
-		type: String,
-		required: true
-	}
 });
 
 export const post = mongoose.model('posts', schema);

@@ -21,14 +21,13 @@ export class PostController {
 	}
 
 	static async postedPost (req: Request, res: Response) {
-		const { Title, Content, categoric} = req.body;
+		const { Title, Content, } = req.body;
 
 
 		if(!Title) return res.status(401).json({ message: 'The title is required'});
 
 		if(!Content) return res.status(401).json({ message: 'The content is required'});
 
-		if(!categoric) return res.status(401).json({ message: 'The categoric is required'});
 
 		const token = getToken(req);
 
@@ -49,15 +48,12 @@ export class PostController {
 		if(!user) return;
 
 		let image;
-		let count;
     
 
 		if (req.files) {
 			image = req.files;
-			count = image.length;
 		}
 
-		if(count as number > 3) return res.status(401).json({ message: 'You can only send 3 images'});
     
 
 		try {
@@ -65,7 +61,6 @@ export class PostController {
 				image,
 				Title,
 				Content,
-				categoric,
 				Author: User.name,
 				IdAuthor: User._id
 			});
@@ -78,17 +73,6 @@ export class PostController {
 		}
 	}
 
-	static async getPostCategoric (req: Request, res:Response) {
-		const {categoric} = req.params;
-    
-		try {
-			const posts = await post.find({ categoric: categoric});
-			res.status(200).json({posts});
-		} catch (error) {
-			throw new MongooseError('Internal server error' + '' + error);
-		}
-
-	}
 
 	static async getMyPost(req:Request, res:Response) {
 		const token = getToken(req);
@@ -134,12 +118,11 @@ export class PostController {
 
 		if(!Post) return res.status(204).json({ message: 'Post not found'});
 
-		const { newTitle, newContent, newCategoric } = req.body;
+		const { newTitle, newContent,  } = req.body;
 
-		if(newTitle || newContent || newCategoric) {
+		if(newTitle || newContent ) {
 			Post.Title = newTitle;
 			Post.Content = newContent;
-			Post.categoric = newCategoric;
 		}
 
 		let image;
