@@ -50,8 +50,8 @@ export class PostController {
 		let image;
     
 
-		if (req.files) {
-			image = req.files;
+		if (req.file) {
+			image = req.file.filename;
 		}
 
     
