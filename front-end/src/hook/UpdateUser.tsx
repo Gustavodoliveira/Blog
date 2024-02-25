@@ -14,10 +14,8 @@ import { toast } from 'react-toastify';
 const UpdateUser = (user: User) => {
 	const [iuser, setUser] = useState<User>({
 		image: new File([new Blob()], 'hero'),
-		email: '',
-		name: '',
-		password: '',
-		ConfirmPassword: '',
+		email: user.email,
+		name: user.name,
 	});
 
 	const edit = () => {
@@ -57,11 +55,17 @@ const UpdateUser = (user: User) => {
 					placeHolder={user.email}
 					Change={(e) => setUser({ ...iuser, email: e.target.value })}
 				/>
-				<Input name="password" type="password" placeHolder="Password" />
+				<Input
+					name="password"
+					type="password"
+					placeHolder="Password"
+					Change={(e) => setUser({ ...iuser, password: e.target.value })}
+				/>
 				<Input
 					name="ConfirmPassword"
 					type="password"
 					placeHolder="Confirm password"
+					Change={(e) => setUser({ ...iuser, ConfirmPassword: e.target.value })}
 				/>
 				<Button Content="Edit" Click={() => edit()} />
 			</Form>

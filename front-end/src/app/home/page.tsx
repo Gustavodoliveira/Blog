@@ -3,7 +3,6 @@
 import * as React from 'react';
 import style from '@/styles/pages/AppHome.module.sass';
 import Modal from '@/components/Modal';
-import SecondStyle from '@/styles/components/formController.module.sass';
 import TertiaryStyle from '@/styles/components/modal.module.sass';
 
 import { FaWindowClose } from 'react-icons/fa';
@@ -65,13 +64,12 @@ export default class App extends React.Component<IAppProps, IAppState> {
 			image: this.state.image,
 			Title: this.state.Title,
 			Content: this.state.Content,
-			categoric: this.state.categoric,
 		};
 	}
 
 	async ApiPosted(): Promise<void | string | Id> {
 		const post = this.post;
-		const token = localStorage.getItem('token');
+		const { token } = parseCookies();
 
 		await axios
 			.post('post/posted', post, {
@@ -97,12 +95,11 @@ export default class App extends React.Component<IAppProps, IAppState> {
 			<main className={style.Container}>
 				<div className={style.Container_header}>
 					<h1>Posts</h1>
-					<button
-						className={style.btn_newPost}
-						onClick={() => this.setState({ newPost: true })}
-					>
-						New Post
-					</button>
+					<Button
+						Click={() => this.setState({ newPost: true })}
+						Content="New Post"
+						Class={`${style.btn_newPost}`}
+					/>
 				</div>
 				{this.state.newPost && (
 					<Modal
@@ -123,10 +120,10 @@ export default class App extends React.Component<IAppProps, IAppState> {
 									type="file"
 									name="image"
 									id="image"
-									multiple={true}
+									multiple={false}
 									Change={(e) => {
 										if (!e.target.files) return;
-										this.setState({ ...this.state, image: e.target.files });
+										this.setState({ ...this.state, image: e.target.files[0] });
 									}}
 								/>
 							</label>
@@ -153,52 +150,33 @@ export default class App extends React.Component<IAppProps, IAppState> {
 								cols={30}
 								rows={10}
 							></textarea>
-							<label htmlFor="categoric">
-								Categoric:
-								<select
-									name="categoric"
-									id="categoric"
-									onChange={(e) =>
-										this.setState({ ...this.state, categoric: e.target.value })
-									}
-								>
-									<option value="Forrest">Forrest</option>
-									<option value="Desert">Desert</option>
-									<option value="Ocean">Ocean</option>
-								</select>{' '}
-							</label>
-
-							<Button
-								Content="New Post"
-								Click={Submit}
-								Class={SecondStyle.btn_form_modal}
-							/>
+							<Button Content="New Post" Click={Submit} />
 						</Form>
 					</Modal>
 				)}
 				<section className={style.post_section}>
 					<div>
-						{this.state.Posts.map((item): React.ReactNode => {
-							return (
-								<Link
-									href={`
-								/${item._id}	
-								`}
-									key={1}
-								>
-									<PostCard
-										Title={item?.Title}
-										Author={item?.Author}
-										Categoric={item?.categoric}
-										Content={item?.Content}
-										key={1}
-										image={item.image.map((item: { filename: any }) => {
-											return item.filename;
-										})}
-									/>
-								</Link>
-							);
-						})}
+						{this.state.Posts.length > 0 ? (
+							this.state.Posts.map((item): React.ReactNode => {
+								return (
+									<Link
+										href={`
+									/${item._id}	
+									`}
+										key={item._id}
+									>
+										<PostCard
+											Title={item?.Title}
+											Author={item?.Author}
+											Content={item?.Content}
+											image={item.image}
+										/>
+									</Link>
+								);
+							})
+						) : (
+							<h2>No post</h2>
+						)}
 					</div>
 				</section>
 			</main>

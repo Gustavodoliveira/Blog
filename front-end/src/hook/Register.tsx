@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import axios from '../api';
 import Input from '@/components/Input';
 import { AxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import store from '@/store/store';
 import { login, setId } from '@/store/AuthUser/Auth';
 import { errs } from '@/interfaces/errs';
@@ -19,11 +19,12 @@ export interface Iuser {
 	image: File;
 	name: string;
 	email: string;
-	password: string;
-	ConfirmPassword: string;
+	password?: string;
+	ConfirmPassword?: string;
 }
 
 const Sign = () => {
+	const par = useSearchParams();
 	const navigate = useRouter();
 	const [preview, setPreview] = useState<boolean>(false);
 	const [user, setUser] = useState<Iuser>({
@@ -35,13 +36,13 @@ const Sign = () => {
 	});
 
 	useEffect(() => {
-		setInterval(() => {
-			const { token } = parseCookies();
-			if (token) {
-				navigate.push('/home');
-			}
-		}, 2000);
-	}, []);
+		const q = par.get('home');
+
+		const { token } = parseCookies();
+		if (token) {
+			navigate.push('/home');
+		}
+	}, [navigate]);
 
 	const onSubmit = async () => {
 		await axios

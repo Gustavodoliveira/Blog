@@ -1,11 +1,19 @@
 @import "../variables/_colors"
 @import "../variables/spacing"
 
+.Container
+	position: relative
+
 .header_page
 	display: flex
 	align-items: center
 	justify-content: space-between
-	margin: $spacing-mid $spacing-large-g
+	padding: $spacing-mid $spacing-large-g
+
+	@media	( max-width: 700px )
+		display: flex
+		gap: $spacing-large
+		margin: $spacing-mid $spacing-min
 
 	h1
 		text-transform: uppercase
@@ -13,6 +21,10 @@
 .myPost_Section
 	display: flex
 	flex-direction: column
+
+	@media	( max-width: 700px )
+		h3
+			margin: $spacing-large $spacing-min
 
 	h3
 		margin: $spacing-large 2rem
@@ -27,3 +39,15 @@
 		justify-content: center
 		gap: $spacing-mid
 		margin: 2rem auto
+
+		@media (max-width: 700px)
+			grid-template-columns: 1fr
+
+	.icon_post_edit
+		margin-right: $spacing-min-min
+		color: green
+		cursor: pointer
+
+	.icon_post_delete
+		color: red
+		cursor: pointer

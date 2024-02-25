@@ -1,10 +1,9 @@
 import * as React from 'react';
 import style from '@/styles/components/post-card.module.sass';
 export interface IAppProps {
-	image: string[];
+	image: string;
 	Title: string;
 	Author: string;
-	Categoric: string;
 	Content: string;
 }
 
@@ -21,9 +20,10 @@ export default class PostCard extends React.Component<IAppProps, IAppState> {
 		return (
 			<div className={style.Container}>
 				<h2>{this.props.Title}</h2>
+
 				<div className={style.Container_image}>
 					<img
-						src={`${process.env.NEXT_PUBLIC_API}public/${this.props.image[0]}`}
+						src={`${process.env.NEXT_PUBLIC_API}public/${this.props.image}`}
 						alt="Image post"
 						width={200}
 						height={180}
@@ -40,9 +40,6 @@ export default class PostCard extends React.Component<IAppProps, IAppState> {
 					<span>
 						<strong>{this.props.Author}</strong>
 					</span>
-					<i>
-						{''} {this.props.Categoric}
-					</i>
 				</div>
 			</div>
 		);

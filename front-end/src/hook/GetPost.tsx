@@ -41,7 +41,6 @@ const GetPost = () => {
 			Title={post.Title}
 			Author={post.Author}
 			Content={post.Content}
-			categoric={post.Categoric}
 			image={post.image.map((image) => {
 				return image?.filename;
 			})}

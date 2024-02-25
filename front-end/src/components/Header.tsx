@@ -62,15 +62,14 @@ export default class Header extends React.Component<IAppProps, IAppState> {
 				<h1 className={sty.text}>
 					<Link href={store.getState().isLogged ? '/home' : '/'}>Blog</Link>
 				</h1>
-				<span
+				<AiOutlineMenu
+					className={sty.icon}
 					onClick={() =>
 						this.state.active
 							? this.setState({ ...this.state, active: false })
 							: this.setState({ ...this.state, active: true })
 					}
-				>
-					<AiOutlineMenu className={sty.icon} />
-				</span>
+				/>
 				<nav>
 					<ul className={this.state.active ? sty.active : ''}>
 						{this.state.user ? (
