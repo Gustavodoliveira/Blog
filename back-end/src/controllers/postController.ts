@@ -39,7 +39,7 @@ export class PostController {
 
 		if(IdValid === false) return res.status(401).json({message: 'Id invalid'});
 
-		const User = await user.findById(ValidId);
+		const User = await user.findById(IdValid);
 
 		if(!User) return res.status(400).json({message :'User not found'});
 
